@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c2a5cb1a6103349a2d15cdc3ad721c, type: 3}
+  m_Name: Assign Mouse Input
+  m_EditorClassIdentifier: 
+  mouseX: {fileID: 11400000, guid: 802392fff1ec2df42a79263884ccf6fb, type: 2}
+  mouseY: {fileID: 11400000, guid: 397fc41f8bf36694fbbae2f95894004c, type: 2}
+  characterStates: {fileID: 11400000, guid: f01d7192f3b4cfd42b5c76919d0f005a, type: 2}

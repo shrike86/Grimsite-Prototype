@@ -8,7 +8,7 @@ namespace Grimsite.Base
     {
 		public string description;
 
-        public abstract bool CheckCondition(CharacterStateManager state);
+        public abstract bool CheckCondition(CharacterStateManager characterStates);
 
     }
 }

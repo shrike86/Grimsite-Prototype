@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39b085c6d64977842a129106abed3102, type: 3}
+  m_Name: Monitor Movement Animation Type
+  m_EditorClassIdentifier: 
+  boolVariable: {fileID: 11400000, guid: 52b8f5b9807db7f4d8de6b001a1ec311, type: 2}
+  trueAction: {fileID: 11400000, guid: f62707ce664564140a18265a29a912e2, type: 2}
+  falseAction: {fileID: 11400000, guid: d685b97da6e6620428ea055be3e43dfc, type: 2}

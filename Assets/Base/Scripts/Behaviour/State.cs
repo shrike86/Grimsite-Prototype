@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Grimsite.Base
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Behaviour/State")]
     public class State : ScriptableObject
     {
     	public StateActions[] onFixed;

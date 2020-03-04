@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Grimsite.Base;
 
-namespace Grimsite.ThirdPersonController
+namespace Grimsite.Base
 {
     public class AnimatorHook : MonoBehaviour
     {
@@ -24,6 +24,12 @@ namespace Grimsite.ThirdPersonController
             {
                 animActions[i].Execute(states);
             }
+        }
+
+        public void PlayAnimation(string targetAnim)
+        {
+            anim.CrossFade(targetAnim, 0.2f);
+            anim.SetBool("isInteracting", true);
         }
     }
 }
