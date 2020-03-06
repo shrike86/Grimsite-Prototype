@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ac4f8e606861be45a3542e25b5d613c, type: 3}
-  m_Name: Move Around Lockon Target
+  m_Script: {fileID: 11500000, guid: 30145a0b5e756f844a1bb521804e0f5d, type: 3}
+  m_Name: Locked On Camera Rotation
   m_EditorClassIdentifier: 
-  movementSpeed: 6
+  isTrue: 1
+  boolVariable: {fileID: 11400000, guid: 52b8f5b9807db7f4d8de6b001a1ec311, type: 2}
+  actions:
+  - {fileID: 11400000, guid: 707c1264a65e94f4f8969aa6105958ec, type: 2}

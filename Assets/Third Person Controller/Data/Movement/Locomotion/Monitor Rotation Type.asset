@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Monitor Rotation Type
   m_EditorClassIdentifier: 
   boolVariable: {fileID: 11400000, guid: 52b8f5b9807db7f4d8de6b001a1ec311, type: 2}
-  trueAction: {fileID: 11400000, guid: cd7abbcc74ce0cf4fa3016181bfbddb7, type: 2}
+  trueAction: {fileID: 11400000, guid: ad56d39114944854789d3d7bc2dbf8a4, type: 2}
   falseAction: {fileID: 11400000, guid: 20d6a12be0dad744b95ca46825f0bcf7, type: 2}

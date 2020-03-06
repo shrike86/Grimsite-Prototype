@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Grimsite.Base
 {
-    public class CharacterStateManager : MonoBehaviour
+    public class CharacterStateManager : MonoBehaviour, ILockable
     {
         [Header("State Bools")]
         public bool isGrounded;
@@ -16,11 +16,13 @@ namespace Grimsite.Base
         public bool isUnarmed;
         public bool isTwoHanded;
         public bool isDualWield;
+        public bool isPlayer;
 
 
         [Header("References")]
         public Animator anim;
         public AnimatorHook animHook;
+        public AnimData animData;
         public new Rigidbody rigidbody;
         public Transform mTransform;
         public GameObject activeModel;
@@ -53,13 +55,12 @@ namespace Grimsite.Base
             rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 
             gameObject.layer = 8;
-            ignoreLayers = ~(1 << 9);
-            ignoreForGroundCheck = ~(1 << 9 | 1 << 10);
+            ignoreForGroundCheck = ~(1 << 10);
 
             animHook = GetComponentInChildren<AnimatorHook>();
             animHook.Init(this);
 
-            //animData = new AnimData(anim);
+            animData = new AnimData(anim);
         }
 
         private void SetupAnimator()
@@ -74,6 +75,14 @@ namespace Grimsite.Base
             }
 
             anim.applyRootMotion = false;
+        }
+
+        public Transform LockOn()
+        {
+            if (!isPlayer)
+                return mTransform;
+            else
+                return null;
         }
     }
 }

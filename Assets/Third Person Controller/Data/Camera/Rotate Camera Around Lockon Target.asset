@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 858e7dd3ec4b6bd49b32dd46d1e38e94, type: 3}
+  m_Name: Rotate Camera Around Lockon Target
+  m_EditorClassIdentifier: 
+  characterStates: {fileID: 11400000, guid: f01d7192f3b4cfd42b5c76919d0f005a, type: 2}
+  delta: {fileID: 11400000, guid: 9313c8066f0ac8340acb4901e96bd8f0, type: 2}
+  speed: 8
+  cameraYTransform: {fileID: 11400000, guid: 40abb11639973d249816df66a81d777a, type: 2}
+  pivotTransform: {fileID: 11400000, guid: 4ddc8a36a68d58a468c859d01ea0ac25, type: 2}
+  yAngle: {fileID: 11400000, guid: 258b9f779ac6be74e9f89e3903c2d054, type: 2}
+  xAngle: {fileID: 11400000, guid: 4cdff671273099d45bcd0484f3425954, type: 2}
+  minClamp: -35
+  maxClamp: 35

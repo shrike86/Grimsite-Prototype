@@ -29,6 +29,7 @@ namespace Grimsite.ThirdPersonController
             if (states == null)
                 Init();
 
+            Debug.Log(angle.value);
             float t = delta.value * speed;
 
             if (!characterStates.value.isLockedOn)

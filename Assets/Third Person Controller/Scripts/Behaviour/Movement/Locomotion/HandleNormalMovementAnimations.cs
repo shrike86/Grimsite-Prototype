@@ -25,7 +25,14 @@ namespace Grimsite.ThirdPersonController
             }
 
             SetAnimWeaponState();
+
+            if (states.anim.GetFloat("sideways") != 0)
+            {
+                states.anim.SetFloat("sideways", 0);
+            }
+
             states.anim.SetFloat(floatName, states.moveAmount, .2f, states.delta);
+            
         }
 
         public override void Init(CharacterStateManager characterStates)

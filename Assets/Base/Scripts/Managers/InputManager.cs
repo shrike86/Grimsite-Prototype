@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Grimsite.Base
 {
@@ -63,6 +64,7 @@ namespace Grimsite.Base
             states.movementDirection = movementDirection;
 
             states.inputStates.isPressed_space = GetButtonStatus(input.Player.Roll.phase);
+            states.inputStates.isPressed_T = Keyboard.current.tKey.wasPressedThisFrame;
         }
 
         bool GetButtonStatus(UnityEngine.InputSystem.InputActionPhase phase)

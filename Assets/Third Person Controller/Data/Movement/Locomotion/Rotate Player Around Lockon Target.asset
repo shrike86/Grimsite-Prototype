@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ac4f8e606861be45a3542e25b5d613c, type: 3}
-  m_Name: Move Around Lockon Target
+  m_Script: {fileID: 11500000, guid: ee27859337f763a47be9a01973de9e85, type: 3}
+  m_Name: Rotate Player Around Lockon Target
   m_EditorClassIdentifier: 
-  movementSpeed: 6
+  speed: 8

@@ -57,6 +57,7 @@ namespace Grimsite.Base
     public class InputStates
     {
         public bool isPressed_space;
+        public bool isPressed_T;
     }
 
 }

@@ -15,13 +15,22 @@ namespace Grimsite.ThirdPersonController
             if (states == null)
                 Init(characterStates);
 
-            states.anim.SetFloat("sideways", states.horizontal);
-            states.anim.SetFloat("forward", states.vertical);
+            SetAnimWeaponState();
+
+            states.anim.SetFloat("forward", states.vertical, .2f, states.delta);
+            states.anim.SetFloat("sideways", states.horizontal, .2f, states.delta);
+
         }
 
         public override void Init(CharacterStateManager characterStates)
         {
             states = characterStates as PlayerStateManager;
+        }
+
+        private void SetAnimWeaponState()
+        {
+            states.anim.SetBool("isUnarmed", states.isUnarmed);
+            states.anim.SetBool("isTwoHanded", states.isTwoHanded);
         }
     }
 }
