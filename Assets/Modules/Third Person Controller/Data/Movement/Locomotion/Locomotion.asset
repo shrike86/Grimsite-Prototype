@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ef22478a7d0b7540ac045b17ef2f70e, type: 3}
+  m_Name: Locomotion
+  m_EditorClassIdentifier: 
+  onFixed: []
+  onUpdate:
+  - {fileID: 11400000, guid: 7ae0c310d76531c4fb7033fdd3949f22, type: 2}
+  - {fileID: 11400000, guid: cbda7329eeb53c24b96e6a2b72cfce20, type: 2}
+  - {fileID: 11400000, guid: 3570258ccf6bc9040bf3de1029326264, type: 2}
+  - {fileID: 11400000, guid: eb8f24062d32de643aa9dd94421b7646, type: 2}
+  onEnter: []
+  onExit: []
+  idCount: 0
+  transitions:
+  - id: 0
+    condition: {fileID: 11400000, guid: 30ed8ce8493a4b34dbc05e2f384d3e7e, type: 2}
+    targetState: {fileID: 11400000, guid: 1d253dab8d4beac46921eccbd306b44c, type: 2}
+    disable: 0
+  - id: 0
+    condition: {fileID: 11400000, guid: 06cfd32be1f36c94d9c6604d70a07428, type: 2}
+    targetState: {fileID: 11400000, guid: 880486612bdd96c44b759295d9da575d, type: 2}
+    disable: 0
