@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Grimsite.Base;
+using static UnityEngine.InputSystem.InputAction;
 
 namespace Grimsite.ThirdPersonController
 {
@@ -14,51 +15,59 @@ namespace Grimsite.ThirdPersonController
         private float leftInputTimer;
         private float rightInputTimer;
 
-        public override bool CheckCondition(CharacterStateManager characterStates)
+        private bool isAttacking;
+
+        PlayerControls inputs;
+
+        public override bool CheckCondition(PlayerStateManager states)
         {
-            if (states == null)
-                Init(characterStates);
+            if (inputs == null)
+                Init(states);
 
-            if (states.isUserInterfaceActive)
-                return false;
-
-            if (states.inputStates.isPressed_leftMouse)
-            {
-                leftInputTimer += states.delta;
-            }
-            else
-            {
-                if (leftInputTimer > 0)
-                {
-                    leftInputTimer += states.delta;
-                    attackAction.isLeftHand = true;
-                    attackAction.Execute(characterStates);
-                    leftInputTimer = 0;
-                    return true;
-                }
-            }
-
-            if (states.inputStates.isPressed_rightMouse)
-            {
-                rightInputTimer += states.delta;
-            }
-            else
-            {
-                if (rightInputTimer > 0)
-                {
-                    attackAction.isLeftHand = false;
-                    attackAction.Execute(characterStates);
-                    rightInputTimer = 0;
-                    return true;
-                }
-            }
-
-            return false;
+            return states.isAttacking;
         }
 
-        private void Init(CharacterStateManager characterStates)
+        private void Init(PlayerStateManager states)
         {
-            states = characterStates as PlayerStateManager;
+            this.states = states;
+            inputs = new PlayerControls();
+            inputs.Enable();
+            inputs.Player.LeftMouse.performed += Attack;
+        }
+
+
+        private void Attack(CallbackContext context)
+        {
+            if (states.isUserInterfaceActive)
+                return;
+
+            if (states.currentAttackPhase == ComboAttackPhase.NotAttacking)
+            {
+                states.currentAttackPhase = ComboAttackPhase.First;
+                attackAction.Execute(states);
+                states.isAttacking = true;
+                return;
+            }
+
+            if (states.currentAttackPhase == ComboAttackPhase.First && states.canCombo)
+            {
+                states.canCombo = false;
+                states.currentAttackPhase = ComboAttackPhase.Second;
+                states.rightHandItem.comboIndex = 1;
+                attackAction.Execute(states);
+                states.isAttacking = true;
+                return;
+            }
+
+            if (states.currentAttackPhase == ComboAttackPhase.Second && states.canCombo)
+            {
+                states.canCombo = false;
+                states.currentAttackPhase = ComboAttackPhase.Third;
+                states.rightHandItem.comboIndex = 2;
+                attackAction.Execute(states);
+                states.isAttacking = true;
+                return;
+            }
         }
     }
 }

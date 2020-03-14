@@ -10,10 +10,8 @@ namespace Grimsite.Inventory
     [CreateAssetMenu(menuName = "Inventory/UI/Equipment Panel")]
     public class EquipmentPanel : ScriptableObject
     {
+        public TransformVariable playerTrans;
         [HideInInspector]
-        public PlayerStateManager states;
-        [HideInInspector]
-        public StateManagerVariable characterStates;
         public TransformVariable parentTransform;
         [Space]
         public EquipmentSlot[] equipmentSlots;
@@ -28,8 +26,7 @@ namespace Grimsite.Inventory
 
         public void Init()
         {
-            playerInvManager = characterStates.value.GetComponent<InventoryManager>();
-            states = characterStates.value as PlayerStateManager;
+            playerInvManager = playerTrans.value.GetComponent<InventoryManager>();
             equipmentSlots = parentTransform.value.GetComponentsInChildren<EquipmentSlot>();
 
             for (int i = 0; i < equipmentSlots.Length; i++)
@@ -39,11 +36,6 @@ namespace Grimsite.Inventory
                 equipmentSlots[i].OnDragEvent += OnDragEvent;
                 equipmentSlots[i].OnEndDragEvent += OnEndDragEvent;
                 equipmentSlots[i].OnDropEvent += OnDropEvent;
-
-                if (equipmentSlots[i].equipmentType == EquipmentType.Weapon)
-                {
-                    equipmentSlots[i].OnItemChanged += UpdateWeaponStates;
-                }
             }
         }
 
@@ -56,6 +48,7 @@ namespace Grimsite.Inventory
                     previousItem = (EquippableItem)equipmentSlots[i].Item;
                     equipmentSlots[i].Item = item;
                     playerInvManager.playerEquippedItems.Add(item);
+                    playerInvManager.playerInventoryItems.Remove(item);
                     return true;
                 }
             }
@@ -73,49 +66,12 @@ namespace Grimsite.Inventory
                 {
                     equipmentSlots[i].Item = null;
                     playerInvManager.playerEquippedItems.Remove(item);
+                    playerInvManager.playerInventoryItems.Add(item);
                     return true;
                 }
             }
 
             return false;
-        }
-
-        private void UpdateWeaponStates(Item item)
-        {
-            Weapon newWeapon = item as Weapon;
-
-            if (item == null)
-            {
-                states.isUnarmed = true;
-                states.isTwoHanded = false;
-                states.leftHandItem = null;
-                states.rightHandItem = null;
-                return;
-            }
-
-            if (newWeapon.isTwoHanded)
-            {
-                states.leftHandItem = newWeapon;
-                states.rightHandItem = newWeapon;
-                states.isUnarmed = false;
-                states.isTwoHanded = true;
-            }
-            else if (newWeapon.isLeft)
-            {
-                states.leftHandItem = newWeapon;
-                states.rightHandItem = null;
-                states.isUnarmed = false;
-                states.isTwoHanded = true;
-            }
-            else
-            {
-                states.rightHandItem = newWeapon;
-                states.leftHandItem = null;
-                states.isUnarmed = false;
-                states.isTwoHanded = true;
-            }
-
-
         }
     }
 }

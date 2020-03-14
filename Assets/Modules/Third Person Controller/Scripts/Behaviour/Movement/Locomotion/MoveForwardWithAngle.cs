@@ -19,11 +19,8 @@ namespace Grimsite.ThirdPersonController
         private PlayerStateManager states;
 
 
-        public override void Execute(CharacterStateManager characterStates)
+        public override void Execute(PlayerStateManager states)
         {
-            if (states == null)
-                Init(characterStates);
-
             float frontY = 0;
             RaycastHit hit;
             Vector3 origin = states.mTransform.position + (states.mTransform.forward * frontRayOffset);
@@ -75,11 +72,6 @@ namespace Grimsite.ThirdPersonController
 
             Debug.DrawRay((states.mTransform.position + Vector3.up * .2f), targetVelocity, Color.green, 0.01f, false);
             states.rigidbody.velocity = Vector3.Lerp(currentVelocity, targetVelocity, states.delta * adaptSpeed);
-        }
-
-        public override void Init(CharacterStateManager characterStates)
-        {
-            states = characterStates as PlayerStateManager;
         }
     }
 }

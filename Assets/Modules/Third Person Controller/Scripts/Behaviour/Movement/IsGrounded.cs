@@ -12,30 +12,30 @@ namespace Grimsite.ThirdPersonController
         public float groundedDistance = 1.4f;
         public float inAirDistance = 0.8f;
 
-        public override void Execute(CharacterStateManager characterStates)
+        public override void Execute(PlayerStateManager states)
         {
-            Vector3 origin = characterStates.mTransform.position;
+            Vector3 origin = states.mTransform.position;
             origin.y += .7f;
             Vector3 direction = -Vector3.up;
             float distance = groundedDistance;
 
-            if (!characterStates.isGrounded)
+            if (!states.isGrounded)
                 distance = inAirDistance;
 
             RaycastHit hit;
 
             Debug.DrawRay(origin, direction * distance);
 
-            if (Physics.SphereCast(origin, .3f, direction, out hit, distance, characterStates.ignoreForGroundCheck))
+            if (Physics.SphereCast(origin, .3f, direction, out hit, distance, states.ignoreForGroundCheck))
             {
-                characterStates.isGrounded = true;
+                states.isGrounded = true;
             }
             else
             {
-                characterStates.isGrounded = false;
+                states.isGrounded = false;
             }
 
-            characterStates.anim.SetBool("onGround", characterStates.isGrounded);
+            states.anim.SetBool("onGround", states.isGrounded);
 
             //if (states.isGrounded)
             //{
@@ -43,11 +43,6 @@ namespace Grimsite.ThirdPersonController
             //    targetPosition.y = hit.point.y;
             //    states.mTransform.position = targetPosition;
             //}
-        }
-
-        public override void Init(CharacterStateManager characterStates)
-        {
-            throw new NotImplementedException();
         }
     }
 }

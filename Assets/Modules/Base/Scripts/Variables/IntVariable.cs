@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace Grimsite.Base
 {
     [CreateAssetMenu(menuName = "Variables/Integer")]
     public class IntVariable : NumberVariable
     {
-		public GameEvent gameEvent;
+		public event System.Action gameEvent;
 
 		private int value;
 
@@ -20,12 +21,9 @@ namespace Grimsite.Base
 		{
 			value = v;
 
-			if (gameEvent != null)
-			{
-				gameEvent.Raise();
-			}
-				
-        }
+			gameEvent?.Invoke();
+
+		}
 
         public void Set(NumberVariable v)
         {
@@ -41,22 +39,23 @@ namespace Grimsite.Base
 				value = i.value;
             }
 
-			if (gameEvent != null)
-			{
-				gameEvent.Raise();
-			}
-		}
+            gameEvent?.Invoke();
+        }
 
         public void Add(int v)
         {
 			value += v;
 
-			if (gameEvent != null)
-			{
-				gameEvent.Raise();
-			}
-		}
-        
+            gameEvent?.Invoke();
+        }
+
+        public void Remove(int v)
+        {
+            value -= v;
+
+            gameEvent?.Invoke();
+        }
+
         public void Add(NumberVariable v)
         {
             if (v is FloatVariable)
@@ -71,10 +70,7 @@ namespace Grimsite.Base
 				value += i.value;
             }
 
-			if (gameEvent != null)
-			{
-				gameEvent.Raise();
-			}
-		}
+            gameEvent?.Invoke();
+        }
     }
 }

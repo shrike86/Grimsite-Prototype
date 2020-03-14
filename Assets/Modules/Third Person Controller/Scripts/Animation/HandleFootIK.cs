@@ -24,24 +24,18 @@ namespace Grimsite.ThirdPersonController
         private Quaternion leftFootIkRotation, rightFootIkRotation;
         private float lastPelvisPositionY, lastRightFootPositionY, lastLeftFootPositionY;
 
-
-        PlayerStateManager states;
-
         public void FixedExecute()
         {
-            AdjustFeetTarget(ref rightFootPosition, HumanBodyBones.RightFoot);
-            AdjustFeetTarget(ref leftFootPosition, HumanBodyBones.LeftFoot);
+            //AdjustFeetTarget(ref rightFootPosition, HumanBodyBones.RightFoot);
+            //AdjustFeetTarget(ref leftFootPosition, HumanBodyBones.LeftFoot);
 
-            //find and raycast to the ground to find positions
-            FeetPositionSolver(rightFootPosition, ref rightFootIkPosition, ref rightFootIkRotation); // handle the solver for right foot
-            FeetPositionSolver(leftFootPosition, ref leftFootIkPosition, ref leftFootIkRotation); //handle the solver for the left foot
+            ////find and raycast to the ground to find positions
+            //FeetPositionSolver(rightFootPosition, ref rightFootIkPosition, ref rightFootIkRotation); // handle the solver for right foot
+            //FeetPositionSolver(leftFootPosition, ref leftFootIkPosition, ref leftFootIkRotation); //handle the solver for the left foot
         }
 
-        public override void Execute(CharacterStateManager characterStates)
+        public override void Execute(PlayerStateManager states)
         {
-            if (states == null)
-                Init(characterStates);
-
             if (enableFeetIk == false) { return; }
             if (states.anim == null) { return; }
 
@@ -56,7 +50,7 @@ namespace Grimsite.ThirdPersonController
                 states.anim.SetIKRotationWeight(AvatarIKGoal.RightFoot, states.anim.GetFloat(rightFootAnimVariableName));
             }
 
-            MoveFeetToIkPoint(AvatarIKGoal.RightFoot, rightFootIkPosition, rightFootIkRotation, ref lastRightFootPositionY);
+            MoveFeetToIkPoint(states, AvatarIKGoal.RightFoot, rightFootIkPosition, rightFootIkRotation, ref lastRightFootPositionY);
 
             //left foot ik position and rotation -- utilise the pro features in here
             states.anim.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
@@ -66,15 +60,10 @@ namespace Grimsite.ThirdPersonController
                 states.anim.SetIKRotationWeight(AvatarIKGoal.LeftFoot, states.anim.GetFloat(leftFootAnimVariableName));
             }
 
-            MoveFeetToIkPoint(AvatarIKGoal.LeftFoot, leftFootIkPosition, leftFootIkRotation, ref lastLeftFootPositionY);
+            MoveFeetToIkPoint(states, AvatarIKGoal.LeftFoot, leftFootIkPosition, leftFootIkRotation, ref lastLeftFootPositionY);
         }
 
-        public override void Init(CharacterStateManager characterStates)
-        {
-            states = characterStates as PlayerStateManager;
-        }
-
-        private void MovePelvisHeight()
+        private void MovePelvisHeight(PlayerStateManager states)
         {
 
             if (rightFootIkPosition == Vector3.zero || leftFootIkPosition == Vector3.zero || lastPelvisPositionY == 0)
@@ -98,7 +87,7 @@ namespace Grimsite.ThirdPersonController
 
         }
 
-        void MoveFeetToIkPoint(AvatarIKGoal foot, Vector3 positionIkHolder, Quaternion rotationIkHolder, ref float lastFootPositionY)
+        void MoveFeetToIkPoint(PlayerStateManager states, AvatarIKGoal foot, Vector3 positionIkHolder, Quaternion rotationIkHolder, ref float lastFootPositionY)
         {
             Vector3 targetIkPosition = states.anim.GetIKPosition(foot);
 
@@ -120,14 +109,14 @@ namespace Grimsite.ThirdPersonController
             states.anim.SetIKPosition(foot, targetIkPosition);
         }
 
-        private void AdjustFeetTarget(ref Vector3 feetPositions, HumanBodyBones foot)
+        private void AdjustFeetTarget(PlayerStateManager states, ref Vector3 feetPositions, HumanBodyBones foot)
         {
             feetPositions = states.anim.GetBoneTransform(foot).position;
             feetPositions.y = states.mTransform.position.y + heightFromGroundRaycast;
 
         }
 
-        private void FeetPositionSolver(Vector3 fromSkyPosition, ref Vector3 feetIkPositions, ref Quaternion feetIkRotations)
+        private void FeetPositionSolver(PlayerStateManager states, Vector3 fromSkyPosition, ref Vector3 feetIkPositions, ref Quaternion feetIkRotations)
         {
             //raycast handling section 
             RaycastHit feetOutHit;

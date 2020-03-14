@@ -10,13 +10,8 @@ namespace Grimsite.ThirdPersonController
     {
         public float speed = 8;
 
-        private PlayerStateManager states;
-
-        public override void Execute(CharacterStateManager characterStates)
+        public override void Execute(PlayerStateManager states)
         {
-            if (states == null)
-                Init(characterStates);
-
             if (states.currentLockonTarget == null)
                 return;
 
@@ -31,11 +26,6 @@ namespace Grimsite.ThirdPersonController
             Quaternion targetRotation = Quaternion.Slerp(states.mTransform.rotation, tr, states.delta * speed);
 
             states.mTransform.rotation = targetRotation;
-        }
-
-        public override void Init(CharacterStateManager characterStates)
-        {
-            states = characterStates as PlayerStateManager;
         }
     }
 }

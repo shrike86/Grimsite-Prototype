@@ -14,11 +14,8 @@ namespace Grimsite.ThirdPersonController
 
         private PlayerStateManager states;
 
-        public override void Execute(CharacterStateManager characterStates)
+        public override void Execute(PlayerStateManager states)
         {
-            if (states == null)
-                Init(characterStates);
-
             states.rigidbody.drag = 0;
             states.generalTime += states.delta;
             Vector3 velocity = states.rigidbody.velocity;
@@ -37,11 +34,6 @@ namespace Grimsite.ThirdPersonController
             //    Quaternion targetRot = Quaternion.LookRotation(targetDirection);
             //    states.mTransform.rotation = Quaternion.Slerp(states.mTransform.rotation, targetRot, states.delta * 15);
             //}
-        }
-
-        public override void Init(CharacterStateManager characterStates)
-        {
-            states = characterStates as PlayerStateManager;
         }
     }
 }

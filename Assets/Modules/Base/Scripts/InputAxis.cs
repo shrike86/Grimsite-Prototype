@@ -13,11 +13,8 @@ namespace Grimsite.Base
 
         private PlayerStateManager states;
 
-        public override void Execute(CharacterStateManager characterStates)
+        public override void Execute(PlayerStateManager states)
         {
-            if (states == null)
-                Init(characterStates);
-
             switch (targetAxis)
             {
                 case InputAxisType.X:
@@ -29,11 +26,6 @@ namespace Grimsite.Base
                 default:
                     break;
             }
-        }
-
-        public override void Init(CharacterStateManager characterStates)
-        {
-            states = characterStates as PlayerStateManager;
         }
 
         public enum InputAxisType

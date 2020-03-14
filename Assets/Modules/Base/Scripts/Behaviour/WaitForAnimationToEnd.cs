@@ -9,9 +9,9 @@ namespace Grimsite.Base
     {
         public string targetBool = "isInteracting";
 
-        public override bool CheckCondition(CharacterStateManager characterStates)
+        public override bool CheckCondition(PlayerStateManager states)
         {
-            bool returnValue = !characterStates.anim.GetBool(targetBool);
+            bool returnValue = !states.anim.GetBool(targetBool);
             return returnValue;
         }
     }

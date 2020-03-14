@@ -12,11 +12,8 @@ namespace Grimsite.ThirdPersonController
 
         private PlayerStateManager states;
 
-        public override void Execute(CharacterStateManager characterStates)
+        public override void Execute(PlayerStateManager states)
         {
-            if (states == null)
-                Init(characterStates);
-
             if (states.isGrounded)
             {
 
@@ -54,11 +51,6 @@ namespace Grimsite.ThirdPersonController
             }
 
             states.transform.position = Vector3.Lerp(states.transform.position, states.mTransform.position, states.delta / 0.1f);
-        }
-
-        public override  void Init(CharacterStateManager characterStates)
-        {
-            states = characterStates as PlayerStateManager;
         }
     }
 }

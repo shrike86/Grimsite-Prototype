@@ -6,40 +6,35 @@ namespace Grimsite.Base
 {
     public class CharacterStateManager : MonoBehaviour, ILockable
     {
-        [Header("Character State Bools")]
-        public bool isGrounded;
-        public bool isInteracting;
-        public bool isLockedOn;
-        public bool isRolling;
-        public bool isOneHandedLeft;
-        public bool isOneHandedRight;
-        public bool isUnarmed;
-        public bool isTwoHanded;
-        public bool isDualWield;
-        public bool isPlayer;
-
-
         [Header("References")]
         public Animator anim;
         public AnimatorHook animHook;
         public AnimData animData;
         public new Rigidbody rigidbody;
-        public Transform mTransform;
         public GameObject activeModel;
+        public Transform mTransform;
+        public bool isPlayer;
+        public bool isDead;
 
         [HideInInspector]
         public LayerMask ignoreLayers;
         [HideInInspector]
         public LayerMask ignoreForGroundCheck;
 
-        public State currentState;
-        public float generalTime;
-        public float delta;
-        public float fixedDelta;
+        public IntVariable health;
 
-        public bool stopActions;
+        private List<Rigidbody> ragdollRigids = new List<Rigidbody>();
+        private List<Collider> ragdollColliders = new List<Collider>();
 
-        private void Start()
+        public Transform LockOn()
+        {
+            if (!isPlayer)
+                return mTransform;
+            else
+                return null;
+        }
+
+        private void Awake()
         {
             Init();
         }
@@ -59,8 +54,54 @@ namespace Grimsite.Base
 
             animHook = GetComponentInChildren<AnimatorHook>();
             animHook.Init(this);
+            mTransform = transform;
 
-            animData = new AnimData(anim);
+            health.Set(100);
+            InitRagdoll();
+
+        }
+
+        public bool IsDead()
+        {
+            if (health.Value <= 0)
+                return true;
+
+            return false;
+        }
+
+        public void TakeDamage(CharacterStateManager st, int amount)
+        {
+            if (st == this)
+            {
+                health.Remove(amount);
+                Debug.Log(health.Value);
+            }
+        }
+
+        public void EnableRagdoll()
+        {
+            for (int i = 0; i < ragdollRigids.Count; i++)
+            {
+                ragdollRigids[i].isKinematic = false;
+
+                Collider col = ragdollColliders[i].GetComponent<Collider>();
+
+                col.enabled = true;
+                col.isTrigger = false;
+            }
+
+            Collider characterCollider = rigidbody.gameObject.GetComponent<Collider>();
+            characterCollider.enabled = false;
+            rigidbody.isKinematic = true;
+
+            StartCoroutine("CloseAnimator");
+        }
+
+        private IEnumerator CloseAnimator()
+        { 
+            yield return new WaitForEndOfFrame();
+            anim.enabled = false;
+            enabled = false;
         }
 
         private void SetupAnimator()
@@ -77,12 +118,24 @@ namespace Grimsite.Base
             anim.applyRootMotion = false;
         }
 
-        public Transform LockOn()
+        private void InitRagdoll()
         {
-            if (!isPlayer)
-                return mTransform;
-            else
-                return null;
+            Rigidbody[] rigs = GetComponentsInChildren<Rigidbody>();
+
+            for (int i = 0; i < rigs.Length; i++)
+            {
+                if (rigs[i] == rigidbody)
+                    continue;
+
+                ragdollRigids.Add(rigs[i]);
+                rigs[i].isKinematic = true;
+
+                Collider col = rigs[i].gameObject.GetComponent<Collider>();
+                col.isTrigger = true;
+                ragdollColliders.Add(col);
+
+                col.enabled = false;
+            }
         }
     }
 }

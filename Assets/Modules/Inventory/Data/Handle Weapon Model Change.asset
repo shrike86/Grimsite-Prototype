@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b231fe3697810046b750d462ae27e3c, type: 3}
+  m_Name: Handle Weapon Model Change
+  m_EditorClassIdentifier: 
+  leftHandWeaponParent: {fileID: 11400000, guid: 9730d29e6e9626a4aab21d074ef8bf33,
+    type: 2}
+  rightHandWeaponParent: {fileID: 11400000, guid: f331b11660fcdfe4386c3ff7d9a63a43,
+    type: 2}
+  equipmentPanel: {fileID: 11400000, guid: 4c4ff41109cca2b40a86343ac5bc1ca7, type: 2}
+  previousLeftHandItem: {fileID: 0}
+  previousRightHandItem: {fileID: 0}

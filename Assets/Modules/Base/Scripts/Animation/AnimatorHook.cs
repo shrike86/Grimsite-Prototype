@@ -11,46 +11,48 @@ namespace Grimsite.Base
         public StateActions[] fixedActions;
         public StateActions[] updatedActions;
 
-        CharacterStateManager states;
+        PlayerStateManager playerStates;
+        CharacterStateManager charStates;
         Animator anim;
 
         public void Init(CharacterStateManager st)
         {
-            states = st;
-            anim = states.anim;
+            anim = st.anim;
+            charStates = st;
+            playerStates = st as PlayerStateManager;
         }
 
         private void FixedUpdate()
         {
-            if (states.anim == null)
+            if (playerStates == null)
                 return;
 
             for (int i = 0; i < fixedActions.Length; i++)
             {
-                fixedActions[i].Execute(states);
+                fixedActions[i].Execute(playerStates);
             }
         }
 
         private void Update()
         {
-            if (states.anim == null)
+            if (playerStates == null)
                 return;
 
             for (int i = 0; i < updatedActions.Length; i++)
             {
-                updatedActions[i].Execute(states);
+                updatedActions[i].Execute(playerStates);
             }
         }
 
 
         private void OnAnimatorIK(int layerIndex)
         {
-            if (states.anim == null)
+            if (playerStates == null)
                 return;
 
             for (int i = 0; i < ikActions.Length; i++)
             {
-                ikActions[i].Execute(states);
+                ikActions[i].Execute(playerStates);
             }
         }
 
@@ -63,6 +65,57 @@ namespace Grimsite.Base
         {
             anim.CrossFade(targetAnim, 0.2f);
             anim.SetBool("isInteracting", true);
+        }
+
+        public void OpenComboPhase()
+        {
+            playerStates.canCombo = true;
+        }
+
+        public void CloseComboPhase()
+        {
+            playerStates.canCombo = false;
+        }
+
+        public void SetEndAttack()
+        {
+            playerStates.isAttacking = false;
+        }
+
+        public void OpenDamageColliders()
+        {
+            if (playerStates == null)
+            {
+
+            }
+            else
+            {
+                if (playerStates.leftHandItem.isDefault && playerStates.rightHandItem.isDefault)
+                {
+                    playerStates.rightHandItem.runtimeWeapon.weaponHook.OpenDamageColliders();
+                    playerStates.leftHandItem.runtimeWeapon.weaponHook.OpenDamageColliders();
+                }
+                else
+                    playerStates.rightHandItem.runtimeWeapon.weaponHook.OpenDamageColliders();
+            }
+        }
+
+        public void CloseDamageColliders()
+        {
+            if (playerStates == null)
+            {
+                // TODO enemy logic.
+            }
+            else
+            {
+                if (playerStates.leftHandItem.isDefault && playerStates.rightHandItem.isDefault)
+                {
+                    playerStates.rightHandItem.runtimeWeapon.weaponHook.CloseDamageColliders();
+                    playerStates.leftHandItem.runtimeWeapon.weaponHook.CloseDamageColliders();
+                }
+                else
+                    playerStates.rightHandItem.runtimeWeapon.weaponHook.CloseDamageColliders();
+            }
         }
     }
 }

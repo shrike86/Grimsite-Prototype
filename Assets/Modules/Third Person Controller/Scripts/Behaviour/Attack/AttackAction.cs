@@ -9,30 +9,27 @@ namespace Grimsite.ThirdPersonController
     [CreateAssetMenu(menuName = "Behaviour/State Actions/Attack/Attack Action")]
     public class AttackAction : StateActions
     {
-        public bool isLeftHand;
         public Weapon defaultWeapon;
 
-        private PlayerStateManager states;
-
-        public override void Execute(CharacterStateManager characterStates)
+        public override void Execute(PlayerStateManager states)
         {
-            if (states == null)
-                Init(characterStates);
-
             if (states.isUnarmed)
             {
-                states.animHook.PlayAnimation(defaultWeapon.attackAnimName);
+                states.animHook.PlayAnimation(defaultWeapon.attackAnimations[defaultWeapon.comboIndex]);
             }
             else if (states.isTwoHanded)
             {
-                states.animHook.PlayAnimation(states.leftHandItem.attackAnimName);
+                states.animHook.PlayAnimation(states.leftHandItem.attackAnimations[states.leftHandItem.comboIndex]);
             }
 
         }
+    }
 
-        public override void Init(CharacterStateManager characterStates)
-        {
-            states = characterStates as PlayerStateManager;
-        }
+    public enum ComboAttackPhase
+    { 
+        NotAttacking,
+        First,
+        Second,
+        Third
     }
 }

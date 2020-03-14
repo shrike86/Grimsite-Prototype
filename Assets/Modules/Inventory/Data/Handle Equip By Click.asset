@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a15f5bfc5e8c6044866e9dbc922de34, type: 3}
+  m_Name: Handle Equip By Click
+  m_EditorClassIdentifier: 
+  inventoryPanel: {fileID: 11400000, guid: 3a9efff538b1fe647b3d27a8650950fa, type: 2}
+  leftEquipmentPanel: {fileID: 11400000, guid: 87542b48d8607304eb5488e5b3943525, type: 2}
+  rightEquipmentPanel: {fileID: 11400000, guid: 4c5587beba0ad9d4d92aa925f936b4a5,
+    type: 2}
+  bottomEquipmentPanel: {fileID: 11400000, guid: 4c4ff41109cca2b40a86343ac5bc1ca7,
+    type: 2}

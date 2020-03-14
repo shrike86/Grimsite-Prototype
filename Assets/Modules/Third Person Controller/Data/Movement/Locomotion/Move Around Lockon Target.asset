@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac4f8e606861be45a3542e25b5d613c, type: 3}
   m_Name: Move Around Lockon Target
   m_EditorClassIdentifier: 
-  movementSpeed: 6
+  movementSpeed: 8

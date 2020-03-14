@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fee13c0ab247b7f4ea8f253c5f60dda2, type: 3}
   m_Name: Handle Lock On Target
   m_EditorClassIdentifier: 
-  playerStates: {fileID: 11400000, guid: f01d7192f3b4cfd42b5c76919d0f005a, type: 2}
+  states: {fileID: 11400000, guid: f01d7192f3b4cfd42b5c76919d0f005a, type: 2}
   delta: {fileID: 11400000, guid: 9313c8066f0ac8340acb4901e96bd8f0, type: 2}
   isLockedOn: {fileID: 11400000, guid: 52b8f5b9807db7f4d8de6b001a1ec311, type: 2}
   cameraTransform: {fileID: 11400000, guid: 40abb11639973d249816df66a81d777a, type: 2}

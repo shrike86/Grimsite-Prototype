@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ef22478a7d0b7540ac045b17ef2f70e, type: 3}
-  m_Name: Attacking
+  m_Name: Attack
   m_EditorClassIdentifier: 
   onFixed: []
   onUpdate:
@@ -23,6 +23,6 @@ MonoBehaviour:
   idCount: 0
   transitions:
   - id: 0
-    condition: {fileID: 11400000, guid: dcbfdd4fa65404d4cb5f8987bbc9c5d0, type: 2}
+    condition: {fileID: 11400000, guid: aabc00384db16d84f86c0e861d1f0115, type: 2}
     targetState: {fileID: 11400000, guid: 522ef8d78e697bc4c80eda34ff2cd317, type: 2}
     disable: 0

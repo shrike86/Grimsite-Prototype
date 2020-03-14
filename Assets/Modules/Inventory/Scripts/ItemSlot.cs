@@ -23,7 +23,7 @@ namespace Grimsite.Inventory
                 item = value;
 
                 if (OnItemChanged != null)
-                    OnItemChanged(item);
+                    OnItemChanged(item, this);
 
                 if (item == null)
                     image.color = disabledColour;
@@ -35,15 +35,12 @@ namespace Grimsite.Inventory
             }
         }
 
-
         public event Action<ItemSlot> OnRightClickEvent;
         public event Action<ItemSlot> OnBeginDragEvent;
         public event Action<ItemSlot> OnDragEvent;
         public event Action<ItemSlot> OnEndDragEvent;
         public event Action<ItemSlot> OnDropEvent;
-        public event Action<Item> OnItemChanged;
-
-        private Vector2 originalImgPosition;
+        public event Action<Item, ItemSlot> OnItemChanged;
 
         private Color normalColour = Color.white;
         private Color disabledColour = new Color(1, 1, 1, 0);
@@ -64,33 +61,28 @@ namespace Grimsite.Inventory
         {
             if (eventData != null && eventData.button == PointerEventData.InputButton.Right)
             {
-                if (OnRightClickEvent != null)
-                    OnRightClickEvent(this);
+                OnRightClickEvent?.Invoke(this);
             }
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (OnEndDragEvent != null)
-                OnEndDragEvent(this);
+            OnEndDragEvent?.Invoke(this);
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (OnBeginDragEvent != null)
-                OnBeginDragEvent(this);
+            OnBeginDragEvent?.Invoke(this);
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (OnDragEvent != null)
-                OnDragEvent(this);
+            OnDragEvent?.Invoke(this);
         }
 
         public void OnDrop(PointerEventData eventData)
         {
-            if (OnDropEvent != null)
-                OnDropEvent(this);
+            OnDropEvent?.Invoke(this);
         }
 
         public virtual bool CanReceiveItem(Item item)

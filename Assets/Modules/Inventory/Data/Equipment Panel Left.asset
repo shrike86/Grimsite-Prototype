@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f9bfa5f73147b478bfe1a227760193, type: 3}
   m_Name: Equipment Panel Left
   m_EditorClassIdentifier: 
+  playerTrans: {fileID: 11400000, guid: a3d69bec500adf441b71009c6862bfda, type: 2}
   parentTransform: {fileID: 11400000, guid: a3022b5f196c58d4a983dc847b2177fe, type: 2}
-  characterStates: {fileID: 11400000, guid: f01d7192f3b4cfd42b5c76919d0f005a, type: 2}
   equipmentSlots:
   - {fileID: 0}
   - {fileID: 0}

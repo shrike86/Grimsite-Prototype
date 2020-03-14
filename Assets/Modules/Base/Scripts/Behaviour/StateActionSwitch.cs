@@ -11,21 +11,16 @@ namespace Grimsite.Base
         public StateActions trueAction;
         public StateActions falseAction;
 
-        public override void Execute(CharacterStateManager characterStates)
+        public override void Execute(PlayerStateManager states)
         {
             if (boolVariable.value)
             {
-                trueAction.Execute(characterStates);
+                trueAction.Execute(states);
             }
             else
             {
-                falseAction.Execute(characterStates);
+                falseAction.Execute(states);
             }
-        }
-
-        public override void Init(CharacterStateManager characterStates)
-        {
-
         }
     }
 }

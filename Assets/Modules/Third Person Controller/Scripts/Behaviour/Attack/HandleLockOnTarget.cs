@@ -13,20 +13,16 @@ namespace Grimsite.ThirdPersonController
         [System.NonSerialized]
         public float validateTargetTimer;
 
-        public StateManagerVariable playerStates;
+        public StateManagerVariable states;
         public FloatVariable delta;
         public BoolVariable isLockedOn;
         public TransformVariable cameraTransform;
 
-        private PlayerStateManager states;
         private float inputTimer;
 
         public override void Execute()
         {
-            if (states == null)
-                Init(playerStates.value);
-
-            if (states.inputStates.isPressed_T)
+            if (states.value.inputStates.isPressed_T)
             {
                 inputTimer += delta.value;
             }
@@ -34,14 +30,14 @@ namespace Grimsite.ThirdPersonController
             {
                 if (inputTimer > 0)
                 {
-                    if (states.isLockedOn)
+                    if (states.value.isLockedOn)
                     {
-                        states.isLockedOn = false;
-                        states.currentLockonTarget = null;
+                        states.value.isLockedOn = false;
+                        states.value.currentLockonTarget = null;
                     }
                     else
                     {
-                        states.isLockedOn = true;
+                        states.value.isLockedOn = true;
                         FindLockableTargets();
                     }
 
@@ -49,7 +45,7 @@ namespace Grimsite.ThirdPersonController
                 }
             }
 
-            if (states.currentLockonTarget != null)
+            if (states.value.currentLockonTarget != null)
             {
                 validateTargetTimer += delta.value;
 
@@ -61,22 +57,22 @@ namespace Grimsite.ThirdPersonController
             }
             else
             {
-                states.isLockedOn = false;
+                states.value.isLockedOn = false;
             }
 
-            isLockedOn.value = states.isLockedOn;
+            isLockedOn.value = states.value.isLockedOn;
         }
 
         private void FindLockableTargets()
         {
-            Collider[] colliders = Physics.OverlapSphere(states.mTransform.position, 10);
+            Collider[] colliders = Physics.OverlapSphere(states.value.mTransform.position, 10);
 
             Vector3 cameraDirection = cameraTransform.value.forward;
             cameraDirection.y = 0;
 
             for (int i = 0; i < colliders.Length; i++)
             {
-                ILockable lockableTarget = colliders[i].GetComponentInParent<ILockable>();
+                ILockable lockableTarget = colliders[i].GetComponent<ILockable>();
 
                 if (lockableTarget == null)
                     continue;
@@ -100,29 +96,24 @@ namespace Grimsite.ThirdPersonController
 
             for (int i = 0; i < targets.Count; i++)
             {
-                float tempDistance = Vector3.Distance(states.mTransform.position, targets[i].position);
+                float tempDistance = Vector3.Distance(states.value.mTransform.position, targets[i].position);
 
-                if (tempDistance < minDistance && targets[i] != states.currentLockonTarget)
+                if (tempDistance < minDistance && targets[i] != states.value.currentLockonTarget)
                 {
                     minDistance = tempDistance;
-                    states.currentLockonTarget = targets[i];
+                    states.value.currentLockonTarget = targets[i];
                 }
             }
         }
 
         private void ValidateTargets()
         {
-            float distance = Vector3.Distance(states.currentLockonTarget.position, playerStates.value.mTransform.position);
+            float distance = Vector3.Distance(states.value.currentLockonTarget.position, states.value.mTransform.position);
 
             if (distance > 30)
             {
-                states.isLockedOn = false;
+                states.value.isLockedOn = false;
             }
-        }
-
-        private void Init(CharacterStateManager characterStates)
-        {
-            states = characterStates as PlayerStateManager;
         }
     }
 }

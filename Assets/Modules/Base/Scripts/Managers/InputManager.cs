@@ -66,7 +66,7 @@ namespace Grimsite.Base
             states.inputStates.isPressed_space = GetButtonStatus(input.Player.Roll.phase);
             states.inputStates.isPressed_T = GetButtonStatus(input.Player.LockOn.phase);
             states.inputStates.isPressed_I = GetButtonStatus(input.Player.ToggleInventory.phase);
-            states.inputStates.isPressed_leftMouse = GetButtonStatus(input.Player.LeftMouse.phase);
+            //states.inputStates.isPressed_leftMouse = input.Player.LeftMouse.started;
             states.inputStates.isPressed_rightMouse = GetButtonStatus(input.Player.RightMouse.phase);
         }
 

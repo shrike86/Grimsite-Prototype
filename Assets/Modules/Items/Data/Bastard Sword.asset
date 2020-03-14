@@ -16,7 +16,16 @@ MonoBehaviour:
   id: 
   icon: {fileID: 21300000, guid: b9edde4760c044e42a0f9e0f86489567, type: 3}
   equipmentType: 8
-  isLeft: 0
+  leftHandWeaponParent: {fileID: 11400000, guid: 9730d29e6e9626a4aab21d074ef8bf33,
+    type: 2}
+  rightHandWeaponParent: {fileID: 11400000, guid: f331b11660fcdfe4386c3ff7d9a63a43,
+    type: 2}
+  modelPrefab: {fileID: 816528757799721573, guid: f6d83ea641d20fc49858a26cf0b0039d,
+    type: 3}
+  attackAnimations:
+  - 2Hand-Sword-Attack2
+  - 2Hand-Sword-Attack1
+  - 2Hand-Sword-Attack6
   isTwoHanded: 1
-  attackAnimName: 2Hand-Sword-Attack2
   comboIndex: 0
+  damageAmount: 35

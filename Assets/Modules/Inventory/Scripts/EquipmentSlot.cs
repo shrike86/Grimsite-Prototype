@@ -9,6 +9,7 @@ namespace Grimsite.Inventory
     {
         public EquipmentType equipmentType;
         public EquipmentType secondaryEquipmentType;
+        public bool isLeftHandWeaponSlot;
 
         private void Awake()
         {
