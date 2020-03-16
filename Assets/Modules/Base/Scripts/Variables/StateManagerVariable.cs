@@ -7,6 +7,6 @@ namespace Grimsite.Base
     [CreateAssetMenu(menuName = "Variables/States Manager")]
     public class StateManagerVariable : ScriptableObject
     {
-        public PlayerStateManager value;
+        public CharacterStateManager value;
     }
 }

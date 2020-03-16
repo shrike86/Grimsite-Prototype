@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Monitor Attack Input
   m_EditorClassIdentifier: 
   description: 
+  gameManager: {fileID: 11400000, guid: 76d37fa328a5a5741b45c7ecc666ca13, type: 2}
   attackAction: {fileID: 11400000, guid: ae1c674dfcbad1247b10f5979d3a15cc, type: 2}
+  comboTimer: 0.37

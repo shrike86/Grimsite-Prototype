@@ -10,8 +10,13 @@ namespace Grimsite.ThirdPersonController
     {
         public float speed = 8;
 
-        public override void Execute(PlayerStateManager states)
+        private PlayerStateManager states;
+
+        public override void Execute(CharacterStateManager charStates)
         {
+            if (states == null)
+                states = charStates as PlayerStateManager;
+
             if (states.currentLockonTarget == null)
                 return;
 

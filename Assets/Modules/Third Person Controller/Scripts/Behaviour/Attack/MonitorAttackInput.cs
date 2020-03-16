@@ -12,15 +12,14 @@ namespace Grimsite.ThirdPersonController
         public AttackAction attackAction;
 
         private PlayerStateManager states;
-        private float leftInputTimer;
-        private float rightInputTimer;
+        private PlayerControls inputs;
+        
 
-        private bool isAttacking;
-
-        PlayerControls inputs;
-
-        public override bool CheckCondition(PlayerStateManager states)
+        public override bool CheckCondition(CharacterStateManager charStates)
         {
+            if (states == null)
+                states = charStates as PlayerStateManager;
+
             if (inputs == null)
                 Init(states);
 
@@ -30,44 +29,20 @@ namespace Grimsite.ThirdPersonController
         private void Init(PlayerStateManager states)
         {
             this.states = states;
+            states.comboCooldownDone = false;
             inputs = new PlayerControls();
             inputs.Enable();
-            inputs.Player.LeftMouse.performed += Attack;
+            inputs.Player.LeftMouse.performed += InitAttack;
         }
 
 
-        private void Attack(CallbackContext context)
+        private void InitAttack(CallbackContext context)
         {
             if (states.isUserInterfaceActive)
                 return;
 
-            if (states.currentAttackPhase == ComboAttackPhase.NotAttacking)
-            {
-                states.currentAttackPhase = ComboAttackPhase.First;
-                attackAction.Execute(states);
-                states.isAttacking = true;
-                return;
-            }
-
-            if (states.currentAttackPhase == ComboAttackPhase.First && states.canCombo)
-            {
-                states.canCombo = false;
-                states.currentAttackPhase = ComboAttackPhase.Second;
-                states.rightHandItem.comboIndex = 1;
-                attackAction.Execute(states);
-                states.isAttacking = true;
-                return;
-            }
-
-            if (states.currentAttackPhase == ComboAttackPhase.Second && states.canCombo)
-            {
-                states.canCombo = false;
-                states.currentAttackPhase = ComboAttackPhase.Third;
-                states.rightHandItem.comboIndex = 2;
-                attackAction.Execute(states);
-                states.isAttacking = true;
-                return;
-            }
+            attackAction.Execute(states);
+            
         }
     }
 }

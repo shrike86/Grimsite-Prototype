@@ -12,7 +12,7 @@ namespace Grimsite.ThirdPersonController
         public float groundedDistance = 1.4f;
         public float inAirDistance = 0.8f;
 
-        public override void Execute(PlayerStateManager states)
+        public override void Execute(CharacterStateManager states)
         {
             Vector3 origin = states.mTransform.position;
             origin.y += .7f;

@@ -12,7 +12,7 @@ namespace Grimsite.ThirdPersonController
         public TransformVariable targetTransform;
         public FloatVariable delta;
         public FloatVariable angle;
-        public StateManagerVariable states;
+        public StateManagerVariable charStates;
 
         public RotateAxis targetAxis;
         public float speed;
@@ -22,11 +22,16 @@ namespace Grimsite.ThirdPersonController
         public bool negative;
         public bool canTurn;
 
+        private PlayerStateManager states;
+
         public override void Execute()
         {
+            if (states == null)
+                states = charStates.value as PlayerStateManager;
+
             float t = delta.value * speed;
 
-            if (!states.value.isLockedOn)
+            if (!states.isLockedOn)
             {
                 if (!negative)
                     angle.value = Mathf.LerpAngle(angle.value, angle.value + targetInput.value * t, t);

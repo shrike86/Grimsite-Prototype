@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8918477ab1a3b344786662f9c5dff363, type: 3}
+  m_Name: Enemy Stats
+  m_EditorClassIdentifier: 
+  health:
+    startingValue: 100
+    targetStat: {fileID: 11400000, guid: 7be315cf04634284e871cfb47b58c4de, type: 2}
+  stamina:
+    startingValue: 100
+    targetStat: {fileID: 11400000, guid: 39a0b56365f69c94bb617dd1a70d4535, type: 2}
+  experienceReward:
+    startingValue: 100
+    targetStat: {fileID: 11400000, guid: ff04a71274409ca469b203a7bd6d990a, type: 2}

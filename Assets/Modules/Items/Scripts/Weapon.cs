@@ -1,6 +1,4 @@
 ﻿using Grimsite.Base;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Grimsite.Items
@@ -15,16 +13,21 @@ namespace Grimsite.Items
         public RuntimeWeapon runtimeWeapon;
         [Header("State")]
         public string[] attackAnimations;
+        public float timeBetweenComboAttack;
         public bool isTwoHanded;
         public bool isDefault;
+        [Header("Stats")]
+        public StatContainer[] damageAmounts;
+        public StatContainer staminaCost;
+        
+        [HideInInspector]
         public int comboIndex;
-
-        // This will be replaced with stats class
-        public int damageAmount;
 
         public void Init(CharacterStateManager charStates)
         {
             runtimeWeapon = new RuntimeWeapon();
+
+            InitWeaponStats();
 
             runtimeWeapon.modelInstance = Instantiate(modelPrefab) as GameObject;
             runtimeWeapon.modelInstance.SetActive(false);
@@ -48,9 +51,18 @@ namespace Grimsite.Items
                 w.runtimeWeapon.modelInstance.transform.localEulerAngles = Vector3.zero;
             }
 
-            // TODO Look into this, not sure why this is now happening after remaking the prefab but dividing by 100 works.
             w.runtimeWeapon.modelInstance.transform.localScale = Vector3.one / 100;
             w.runtimeWeapon.modelInstance.SetActive(true);
+        }
+
+        private void InitWeaponStats()
+        {
+            for (int i = 0; i < damageAmounts.Length; i++)
+            {
+                damageAmounts[i].targetStat.Set(damageAmounts[i].startingValue);
+            }
+
+            staminaCost.targetStat.Set(staminaCost.startingValue);
         }
     }
 }

@@ -10,12 +10,17 @@ namespace Grimsite.ThirdPersonController
         public InputAxis mouseX;
         public InputAxis mouseY;
 
-        public StateManagerVariable characterStates;
+        public StateManagerVariable charStates;
+
+        private PlayerStateManager states;
 
         public override void Execute()
         {
-            mouseX.Execute(characterStates.value);
-            mouseY.Execute(characterStates.value);
+            if (states == null)
+                states = charStates.value as PlayerStateManager;
+
+            mouseX.Execute(states);
+            mouseY.Execute(states);
         }
     }
 }

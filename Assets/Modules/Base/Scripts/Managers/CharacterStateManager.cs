@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Grimsite.Items;
+using Grimsite.ThirdPersonController;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,18 +14,38 @@ namespace Grimsite.Base
         public new Rigidbody rigidbody;
         public GameObject activeModel;
         public Transform mTransform;
+        public Weapon rightHandItem;
+        public Weapon leftHandItem;
+
+        [Header("Character State Bools")]
+        public State currentState;
+        public ComboAttackPhase currentAttackPhase;
+        [Space]
+        public bool isGrounded;
+        public bool isInteracting;
+        public bool isLockedOn;
+        public bool isRolling;
+        public bool isOneHandedLeft;
+        public bool isOneHandedRight;
+        public bool isAttacking;
         public bool isPlayer;
         public bool isDead;
+        public bool isUnarmed;
+        public bool isTwoHanded;
+        public bool isDualWield;
+        public bool canCombo;
+        public bool comboCooldownDone;
+        [Header("Stats")]
+        public CharacterStats runtimeStats;
 
         [HideInInspector]
         public LayerMask ignoreLayers;
         [HideInInspector]
         public LayerMask ignoreForGroundCheck;
-
-        public IntVariable health;
-
-        private List<Rigidbody> ragdollRigids = new List<Rigidbody>();
-        private List<Collider> ragdollColliders = new List<Collider>();
+        [HideInInspector]
+        public List<Rigidbody> ragdollRigids = new List<Rigidbody>();
+        [HideInInspector]
+        public List<Collider> ragdollColliders = new List<Collider>();
 
         public Transform LockOn()
         {
@@ -54,16 +75,24 @@ namespace Grimsite.Base
 
             animHook = GetComponentInChildren<AnimatorHook>();
             animHook.Init(this);
+
             mTransform = transform;
 
-            health.Set(100);
-            InitRagdoll();
-
+            currentState.OnEnter(this);
+            runtimeStats.InitStats();
         }
 
         public bool IsDead()
         {
-            if (health.Value <= 0)
+            if (((FloatVariable)runtimeStats.health.targetStat.value).value <= 0)
+                return true;
+
+            return false;
+        }
+
+        public bool HasStamina(int amount)
+        {
+            if (((FloatVariable)runtimeStats.stamina.targetStat.value).value >= amount)
                 return true;
 
             return false;
@@ -73,35 +102,8 @@ namespace Grimsite.Base
         {
             if (st == this)
             {
-                health.Remove(amount);
-                Debug.Log(health.Value);
+                ((FloatVariable)runtimeStats.health.targetStat.value).Remove(amount);
             }
-        }
-
-        public void EnableRagdoll()
-        {
-            for (int i = 0; i < ragdollRigids.Count; i++)
-            {
-                ragdollRigids[i].isKinematic = false;
-
-                Collider col = ragdollColliders[i].GetComponent<Collider>();
-
-                col.enabled = true;
-                col.isTrigger = false;
-            }
-
-            Collider characterCollider = rigidbody.gameObject.GetComponent<Collider>();
-            characterCollider.enabled = false;
-            rigidbody.isKinematic = true;
-
-            StartCoroutine("CloseAnimator");
-        }
-
-        private IEnumerator CloseAnimator()
-        { 
-            yield return new WaitForEndOfFrame();
-            anim.enabled = false;
-            enabled = false;
         }
 
         private void SetupAnimator()
@@ -116,26 +118,6 @@ namespace Grimsite.Base
             }
 
             anim.applyRootMotion = false;
-        }
-
-        private void InitRagdoll()
-        {
-            Rigidbody[] rigs = GetComponentsInChildren<Rigidbody>();
-
-            for (int i = 0; i < rigs.Length; i++)
-            {
-                if (rigs[i] == rigidbody)
-                    continue;
-
-                ragdollRigids.Add(rigs[i]);
-                rigs[i].isKinematic = true;
-
-                Collider col = rigs[i].gameObject.GetComponent<Collider>();
-                col.isTrigger = true;
-                ragdollColliders.Add(col);
-
-                col.enabled = false;
-            }
         }
     }
 }

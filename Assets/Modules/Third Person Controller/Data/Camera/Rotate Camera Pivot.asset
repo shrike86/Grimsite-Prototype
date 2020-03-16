@@ -16,7 +16,7 @@ MonoBehaviour:
   targetTransform: {fileID: 11400000, guid: 4ddc8a36a68d58a468c859d01ea0ac25, type: 2}
   delta: {fileID: 11400000, guid: 9313c8066f0ac8340acb4901e96bd8f0, type: 2}
   angle: {fileID: 11400000, guid: 4cdff671273099d45bcd0484f3425954, type: 2}
-  states: {fileID: 11400000, guid: f01d7192f3b4cfd42b5c76919d0f005a, type: 2}
+  charStates: {fileID: 11400000, guid: f01d7192f3b4cfd42b5c76919d0f005a, type: 2}
   targetAxis: 0
   speed: 13
   minClamp: -20

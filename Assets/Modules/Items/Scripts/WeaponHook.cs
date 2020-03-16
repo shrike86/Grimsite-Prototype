@@ -45,8 +45,7 @@ namespace Grimsite.Items
             if (attackingChar.isPlayer)
             {
                 PlayerStateManager st = attackingChar as PlayerStateManager;
-                hitCharacter.TakeDamage(hitCharacter, st.rightHandItem.damageAmount);   
-
+                hitCharacter.TakeDamage(hitCharacter, ((IntVariable)st.rightHandItem.damageAmounts[st.rightHandItem.comboIndex].targetStat.value).value);
             }
         }
 

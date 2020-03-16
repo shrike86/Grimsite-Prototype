@@ -11,7 +11,7 @@ namespace Grimsite.Base
         public StateActions trueAction;
         public StateActions falseAction;
 
-        public override void Execute(PlayerStateManager states)
+        public override void Execute(CharacterStateManager states)
         {
             if (boolVariable.value)
             {

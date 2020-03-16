@@ -8,9 +8,14 @@ namespace Grimsite.ThirdPersonController
     [CreateAssetMenu(menuName = "Behaviour/State Actions/Movement/Handle Lock on Movement Animations")]
     public class HandleLockonMovementAnimations : StateActions
     {
+        private PlayerStateManager states;
 
-        public override void Execute(PlayerStateManager states)
+
+        public override void Execute(CharacterStateManager charStates)
         {
+            if (states == null)
+                states = charStates as PlayerStateManager;
+
             SetAnimStates(states);
 
             states.anim.SetFloat("forward", states.vertical, .2f, states.delta);
@@ -18,7 +23,7 @@ namespace Grimsite.ThirdPersonController
 
         }
 
-        private void SetAnimStates(PlayerStateManager states)
+        private void SetAnimStates(CharacterStateManager states)
         {
             states.anim.SetBool("isUnarmed", states.isUnarmed);
             states.anim.SetBool("isTwoHanded", states.isTwoHanded);

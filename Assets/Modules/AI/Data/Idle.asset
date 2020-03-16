@@ -13,8 +13,14 @@ MonoBehaviour:
   m_Name: Idle
   m_EditorClassIdentifier: 
   onFixed: []
-  onUpdate: []
-  onEnter: []
+  onUpdate:
+  - {fileID: 11400000, guid: fec6a32cf6daeeb4495b9c1548812c37, type: 2}
+  onEnter:
+  - {fileID: 11400000, guid: 3bb6e6dca73813a40b918a0eaa27478a, type: 2}
   onExit: []
   idCount: 0
-  transitions: []
+  transitions:
+  - id: 0
+    condition: {fileID: 11400000, guid: 6601c24a5dff5da479aa88c6fd34c0a4, type: 2}
+    targetState: {fileID: 11400000, guid: dfd03311630934f4a80c117029f45b70, type: 2}
+    disable: 0

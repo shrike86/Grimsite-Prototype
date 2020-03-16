@@ -6,6 +6,6 @@ namespace Grimsite.Base
 {
     public abstract class StateActions : ScriptableObject
     {
-        public abstract void Execute(PlayerStateManager states);
+        public abstract void Execute(CharacterStateManager characterStates);
     }
 }

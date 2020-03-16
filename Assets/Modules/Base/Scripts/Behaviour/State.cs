@@ -16,33 +16,30 @@ namespace Grimsite.Base
 		[SerializeField]
         public List<Transition> transitions = new List<Transition>();
 
-        public void OnEnter(PlayerStateManager states)
+        public void OnEnter(CharacterStateManager states)
         {
             ExecuteActions(states, onEnter);
         }
 	
-		public void FixedTick(PlayerStateManager states)
+		public void FixedTick(CharacterStateManager states)
 		{
 			ExecuteActions(states,onFixed);
             CheckTransitions(states);
         }
 
-        public void Tick(PlayerStateManager states)
+        public void Tick(CharacterStateManager states)
         {
             ExecuteActions(states, onUpdate);
             CheckTransitions(states);
         }
 
-        public void OnExit(PlayerStateManager states)
+        public void OnExit(CharacterStateManager states)
         {
             ExecuteActions(states, onExit);
         }
 
-        public void CheckTransitions(PlayerStateManager states)
+        public void CheckTransitions(CharacterStateManager states)
         {
-            if (states.stopActions)
-                return;
-
             for (int i = 0; i < transitions.Count; i++)
             {
                 if (transitions[i].disable)
@@ -61,15 +58,10 @@ namespace Grimsite.Base
             }
         }
         
-        public void ExecuteActions(PlayerStateManager states, StateActions[] l)
+        public void ExecuteActions(CharacterStateManager states, StateActions[] l)
         {
-            states.stopActions = false;
-
             for (int i = 0; i < l.Length; i++)
             {
-                if (states.stopActions)
-                    return;
-
                 if (l[i] != null)
                     l[i].Execute(states);
             }

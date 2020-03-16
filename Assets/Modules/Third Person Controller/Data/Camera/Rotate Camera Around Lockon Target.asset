@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 858e7dd3ec4b6bd49b32dd46d1e38e94, type: 3}
   m_Name: Rotate Camera Around Lockon Target
   m_EditorClassIdentifier: 
-  states: {fileID: 11400000, guid: f01d7192f3b4cfd42b5c76919d0f005a, type: 2}
+  charStates: {fileID: 11400000, guid: f01d7192f3b4cfd42b5c76919d0f005a, type: 2}
   delta: {fileID: 11400000, guid: 9313c8066f0ac8340acb4901e96bd8f0, type: 2}
   speed: 8
   cameraYTransform: {fileID: 11400000, guid: 40abb11639973d249816df66a81d777a, type: 2}

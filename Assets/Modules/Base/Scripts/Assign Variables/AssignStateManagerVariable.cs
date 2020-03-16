@@ -10,7 +10,7 @@ namespace Grimsite.Base
 
         private void OnEnable()
         {
-            target.value = GetComponent<PlayerStateManager>();
+            target.value = GetComponent<CharacterStateManager>();
         }
     }
 }

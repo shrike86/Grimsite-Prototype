@@ -10,7 +10,7 @@ namespace Grimsite.Base
     public class InventoryManager : MonoBehaviour
     {
         [Header("References")]
-        public StateManagerVariable states;
+        public StateManagerVariable charStates;
         public TransformVariable inventory;
 
         public InventoryPanel inventoryPanel;
@@ -28,9 +28,11 @@ namespace Grimsite.Base
         public Action handleEquipByDrag;
         public Action handleEquipByClick;
 
+        private PlayerStateManager states;
 
         private void Awake()
         {
+            states = charStates.value as PlayerStateManager;
             handleEquipByDrag.Execute();
             handleEquipByClick.Execute();
         }
@@ -42,12 +44,12 @@ namespace Grimsite.Base
             rightEquipmentPanel.Init();
             bottomEquipmentPanel.Init();
 
-            weaponModelHandler.Execute(states.value);
+            weaponModelHandler.Execute(states);
         }
 
         private void Update()
         {
-            monitorInventoryToggle.Execute(states.value);
+            monitorInventoryToggle.Execute(states);
         }
     }
 }

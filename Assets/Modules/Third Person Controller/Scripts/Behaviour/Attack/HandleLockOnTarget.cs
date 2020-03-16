@@ -13,16 +13,20 @@ namespace Grimsite.ThirdPersonController
         [System.NonSerialized]
         public float validateTargetTimer;
 
-        public StateManagerVariable states;
+        public StateManagerVariable charStates;
         public FloatVariable delta;
         public BoolVariable isLockedOn;
         public TransformVariable cameraTransform;
 
         private float inputTimer;
+        private PlayerStateManager states;
 
         public override void Execute()
         {
-            if (states.value.inputStates.isPressed_T)
+            if (states == null)
+                states = charStates.value as PlayerStateManager;
+
+            if (states.inputStates.isPressed_T)
             {
                 inputTimer += delta.value;
             }
@@ -30,14 +34,14 @@ namespace Grimsite.ThirdPersonController
             {
                 if (inputTimer > 0)
                 {
-                    if (states.value.isLockedOn)
+                    if (states.isLockedOn)
                     {
-                        states.value.isLockedOn = false;
-                        states.value.currentLockonTarget = null;
+                        states.isLockedOn = false;
+                        states.currentLockonTarget = null;
                     }
                     else
                     {
-                        states.value.isLockedOn = true;
+                        states.isLockedOn = true;
                         FindLockableTargets();
                     }
 
@@ -45,7 +49,7 @@ namespace Grimsite.ThirdPersonController
                 }
             }
 
-            if (states.value.currentLockonTarget != null)
+            if (states.currentLockonTarget != null)
             {
                 validateTargetTimer += delta.value;
 
@@ -57,15 +61,15 @@ namespace Grimsite.ThirdPersonController
             }
             else
             {
-                states.value.isLockedOn = false;
+                states.isLockedOn = false;
             }
 
-            isLockedOn.value = states.value.isLockedOn;
+            isLockedOn.value = states.isLockedOn;
         }
 
         private void FindLockableTargets()
         {
-            Collider[] colliders = Physics.OverlapSphere(states.value.mTransform.position, 10);
+            Collider[] colliders = Physics.OverlapSphere(states.mTransform.position, 10);
 
             Vector3 cameraDirection = cameraTransform.value.forward;
             cameraDirection.y = 0;
@@ -96,23 +100,23 @@ namespace Grimsite.ThirdPersonController
 
             for (int i = 0; i < targets.Count; i++)
             {
-                float tempDistance = Vector3.Distance(states.value.mTransform.position, targets[i].position);
+                float tempDistance = Vector3.Distance(states.mTransform.position, targets[i].position);
 
-                if (tempDistance < minDistance && targets[i] != states.value.currentLockonTarget)
+                if (tempDistance < minDistance && targets[i] != states.currentLockonTarget)
                 {
                     minDistance = tempDistance;
-                    states.value.currentLockonTarget = targets[i];
+                    states.currentLockonTarget = targets[i];
                 }
             }
         }
 
         private void ValidateTargets()
         {
-            float distance = Vector3.Distance(states.value.currentLockonTarget.position, states.value.mTransform.position);
+            float distance = Vector3.Distance(states.currentLockonTarget.position, states.mTransform.position);
 
             if (distance > 30)
             {
-                states.value.isLockedOn = false;
+                states.isLockedOn = false;
             }
         }
     }

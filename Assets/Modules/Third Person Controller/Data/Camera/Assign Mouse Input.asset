@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseX: {fileID: 11400000, guid: 802392fff1ec2df42a79263884ccf6fb, type: 2}
   mouseY: {fileID: 11400000, guid: 397fc41f8bf36694fbbae2f95894004c, type: 2}
-  characterStates: {fileID: 11400000, guid: f01d7192f3b4cfd42b5c76919d0f005a, type: 2}
+  charStates: {fileID: 11400000, guid: f01d7192f3b4cfd42b5c76919d0f005a, type: 2}

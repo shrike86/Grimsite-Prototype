@@ -14,8 +14,11 @@ namespace Grimsite.Inventory
         private float inputTimer;
         private CanvasGroup invCanvasGroup;
 
-        public override void Execute(PlayerStateManager states)
+        public override void Execute(CharacterStateManager charStates)
         {
+            if (states == null)
+                states = charStates as PlayerStateManager;
+
             if (invCanvasGroup == null)
                 Init();
 

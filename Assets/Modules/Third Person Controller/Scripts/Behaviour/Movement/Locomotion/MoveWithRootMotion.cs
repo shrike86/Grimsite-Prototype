@@ -8,7 +8,7 @@ namespace Grimsite.ThirdPersonController
     [CreateAssetMenu(menuName = "Behaviour/State Actions/Movement/Move With Root Motion")]
     public class MoveWithRootMotion : StateActions
     {
-        public override void Execute(PlayerStateManager states)
+        public override void Execute(CharacterStateManager states)
         {
             states.rigidbody.isKinematic = false;
             Vector3 velocity = states.rigidbody.velocity;

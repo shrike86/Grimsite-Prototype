@@ -10,12 +10,18 @@ namespace Grimsite.ThirdPersonController
     {
         public string targetBool = "isInteracting";
 
-        public override bool CheckCondition(PlayerStateManager states)
+        private PlayerStateManager states;
+
+        public override bool CheckCondition(CharacterStateManager charStates)
         {
+            if (states == null)
+                states = charStates as PlayerStateManager;
+
             bool isAttacking = states.anim.GetBool(targetBool);
 
             if (!isAttacking)
             {
+                states.comboCooldownDone = false;
                 states.leftHandItem.comboIndex = 0;
                 states.rightHandItem.comboIndex = 0;
                 states.currentAttackPhase = ComboAttackPhase.NotAttacking;

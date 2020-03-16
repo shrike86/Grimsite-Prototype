@@ -10,19 +10,13 @@ namespace Grimsite.Base
     {
 		public event System.Action gameEvent;
 
-		private int value;
-
-        public int Value
-		{
-			get { return value; }
-		}
+		public int value;
 
 		public void Set(int v)
 		{
 			value = v;
 
 			gameEvent?.Invoke();
-
 		}
 
         public void Set(NumberVariable v)

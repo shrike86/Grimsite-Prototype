@@ -8,10 +8,16 @@ namespace Grimsite.ThirdPersonController
     [CreateAssetMenu(menuName = "Behaviour/Conditions/Monitor Roll Input")]
     public class MonitorRollInput : Condition
     {
+        public StateActions rollAction;
+
+        private PlayerStateManager states;
         private float rollTimer;
 
-        public override bool CheckCondition(PlayerStateManager states)
+        public override bool CheckCondition(CharacterStateManager charStates)
         {
+            if (states == null)
+                states = charStates as PlayerStateManager;
+
             bool returnValue = false;
             states.isRolling = false;
 
@@ -28,38 +34,14 @@ namespace Grimsite.ThirdPersonController
 
                     if (states.moveAmount > 0)
                     {
-                        //states.anim.SetFloat("vertical", 1);
-                        PlayRollAnimation(states);
-                        states.isRolling = true;
-
-                        if (states.isLockedOn)
-                        {
-                            states.rollDirection = states.movementDirection;
-                        }
-                        else
-                        {
-                            states.rollDirection = states.mTransform.forward;
-                        }
+                        rollAction.Execute(states);
                     }
-
                 }
 
                 rollTimer = 0;
             }
 
             return returnValue;
-        }
-
-        private void PlayRollAnimation(PlayerStateManager states)
-        {
-            if (states.isUnarmed)
-            {
-                states.animHook.PlayAnimation("Unarmed Roll");
-            }
-            else if (states.isTwoHanded)
-            {
-                states.animHook.PlayAnimation("Two Handed Roll");
-            }
         }
     }
 }

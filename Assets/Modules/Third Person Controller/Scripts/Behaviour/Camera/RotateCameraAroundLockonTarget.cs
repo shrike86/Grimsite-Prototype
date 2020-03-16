@@ -8,7 +8,7 @@ namespace Grimsite.ThirdPersonController
     [CreateAssetMenu(menuName = "Behaviour/Mono Actions/Camera/Rotate Camera Around Lock on Target")]
     public class RotateCameraAroundLockonTarget : Action
     {
-        public StateManagerVariable states;
+        public StateManagerVariable charStates;
         public FloatVariable delta;
         public float speed = 8;
         public TransformVariable cameraYTransform;
@@ -19,13 +19,17 @@ namespace Grimsite.ThirdPersonController
         public float minClamp = -35;
         public float maxClamp = 35;
 
+        private PlayerStateManager states;
+
         public override void Execute()
         {
+            if (states == null)
+                states = charStates.value as PlayerStateManager;
 
-            if (states.value.currentLockonTarget == null)
+            if (states.currentLockonTarget == null)
                 return;
 
-            Vector3 direction = states.value.currentLockonTarget.position - cameraYTransform.value.position;
+            Vector3 direction = states.currentLockonTarget.position - cameraYTransform.value.position;
             Vector3 pivotDirection = direction;
             direction.y = 0;
             
@@ -34,7 +38,7 @@ namespace Grimsite.ThirdPersonController
             cameraYTransform.value.rotation = Quaternion.Slerp(cameraYTransform.value.rotation, targetRotation, delta.value * speed);
 
             // Ensure the pivot will look at the lock on target. Helps when rolling.
-            float distance = Vector3.Distance(states.value.mTransform.position, states.value.currentLockonTarget.position);
+            float distance = Vector3.Distance(states.mTransform.position, states.currentLockonTarget.position);
             distance /= 2;
             Vector3 lookPosition = pivotDirection * distance;
             lookPosition += cameraYTransform.value.position;

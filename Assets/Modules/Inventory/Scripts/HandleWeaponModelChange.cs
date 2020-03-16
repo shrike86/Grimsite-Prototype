@@ -13,13 +13,15 @@ namespace Grimsite.Inventory
 
         public Weapon previousLeftHandItem;
         public Weapon previousRightHandItem;
-        public Weapon defaultWeapon;
+        public Weapon leftFist;
+        public Weapon rightFist;
 
         private PlayerStateManager states;
 
-        public override void Execute(PlayerStateManager states)
+        public override void Execute(CharacterStateManager charStates)
         {
-            this.states = states;
+            if (states == null)
+                this.states = charStates as PlayerStateManager;
 
             for (int i = 0; i < equipmentPanel.equipmentSlots.Length; i++)
             {
@@ -76,14 +78,11 @@ namespace Grimsite.Inventory
             EquipmentSlot equipmentSlot = itemSlot as EquipmentSlot;
             Weapon newWeapon = item as Weapon;
 
-            if (newWeapon != null && newWeapon.runtimeWeapon == null)
-            {
-                newWeapon.Init(states);
-            }
-            else
-            {
-                newWeapon.runtimeWeapon.modelInstance.SetActive(true);
-            }
+            if (previousLeftHandItem != null)
+                Destroy(previousLeftHandItem.runtimeWeapon.modelInstance.gameObject);
+
+            if (previousRightHandItem != null)
+                Destroy(previousRightHandItem.runtimeWeapon.modelInstance.gameObject);
 
             if (newWeapon == null)
             {
@@ -91,14 +90,17 @@ namespace Grimsite.Inventory
                 return;
             }
 
+            newWeapon.Init(states);
             newWeapon.ParentWeaponUnderHand(newWeapon, equipmentSlot.isLeftHandWeaponSlot);
         }
 
         private void EquipDefaultWeapon()
         {
-            previousRightHandItem.runtimeWeapon.modelInstance.SetActive(false);
-            previousLeftHandItem = defaultWeapon;
-            previousRightHandItem = defaultWeapon;
+            states.leftHandItem = leftFist;
+            states.rightHandItem = rightFist;
+
+            states.leftHandItem.Init(states);
+            states.rightHandItem.Init(states);
         }
     }
 }

@@ -1,29 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Grimsite.ThirdPersonController;
 using UnityEngine;
-using Grimsite.Items;
-using Grimsite.ThirdPersonController;
 
 namespace Grimsite.Base
 {
     public class PlayerStateManager : CharacterStateManager
     {
-        [Header("Character State Bools")]
-        public bool isGrounded;
-        public bool isInteracting;
-        public bool isLockedOn;
-        public bool isRolling;
-        public bool isOneHandedLeft;
-        public bool isOneHandedRight;
-        public bool isUnarmed;
-        public bool isTwoHanded;
-        public bool isDualWield;
-        public bool canCombo;
-        public bool isAttacking;
-        public ComboAttackPhase currentAttackPhase;
+        [Header("Player State")]
+        public State playerConstant;
 
-
-        public State currentState;
         public float generalTime;
         public float delta;
         public float fixedDelta;
@@ -45,23 +29,24 @@ namespace Grimsite.Base
 
         public Transform currentLockonTarget;
 
-        public Weapon rightHandItem;
-        public Weapon leftHandItem;
-
-
         private void Awake()
         {
             Init();
         }
 
-        public override void Init()
+        private void Start()
         {
-            base.Init();
+            runtimeStats.InitStats();
 
-            // This will be removed when unarmed is no longer the default and the last equipped weapons will be equippen on init.
+            // This will be removed when unarmed is no longer the default and the last equipped weapons will be equipped on init.
             leftHandItem.Init(this);
             rightHandItem.Init(this);
             isUnarmed = true;
+        }
+
+        public override void Init()
+        {
+            base.Init();
 
             animData = new AnimData(anim);
             currentAttackPhase = ComboAttackPhase.NotAttacking;
@@ -75,6 +60,8 @@ namespace Grimsite.Base
             {
                 currentState.FixedTick(this);
             }
+
+            playerConstant.FixedTick(this);
         }
 
         private void Update()
@@ -85,6 +72,8 @@ namespace Grimsite.Base
             {
                 currentState.Tick(this);
             }
+
+            playerConstant.Tick(this);
         }
     }
 

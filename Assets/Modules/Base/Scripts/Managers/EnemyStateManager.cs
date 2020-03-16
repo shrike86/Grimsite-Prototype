@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Grimsite.AI;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,9 +7,11 @@ namespace Grimsite.Base
 {
     public class EnemyStateManager : CharacterStateManager
     {
-        public State currentState;
         public float delta;
         public float fixedDelta;
+
+        [HideInInspector]
+        public DamageCollider hitCollider;
 
         private void Awake()
         {
@@ -19,20 +22,39 @@ namespace Grimsite.Base
         {
             base.Init();
 
+            hitCollider = GetComponent<DamageCollider>();
+            hitCollider.onHit += AwardExperience;
         }
 
         private void FixedUpdate()
         {
+            delta = Time.fixedDeltaTime;
 
+            if (currentState != null)
+            {
+                currentState.FixedTick(this);
+            }
         }
 
         private void Update()
         {
-            if (IsDead())
+            delta = Time.deltaTime;
+
+            if (currentState != null)
             {
-                isDead = true;
-                EnableRagdoll();
+                currentState.Tick(this);
             }
+        }
+
+
+        private void AwardExperience(CharacterStateManager charStates)
+        {
+            PlayerStateManager playerStates = charStates as PlayerStateManager;
+            PlayerStats playerStats = playerStates.runtimeStats as PlayerStats;
+            EnemyStats thisEnemyStats = this.runtimeStats as EnemyStats;
+
+            playerStats.experience.targetStat.Add(((FloatVariable)thisEnemyStats.experienceReward.targetStat.value).value);
+            hitCollider.onHit -= AwardExperience;
         }
     }
 }

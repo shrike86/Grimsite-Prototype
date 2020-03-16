@@ -9,7 +9,7 @@ namespace Grimsite.Base
     {
 		public bool status;
 
-		public override void Execute(PlayerStateManager states)
+		public override void Execute(CharacterStateManager states)
 		{
 			states.anim.applyRootMotion = status;
 		}

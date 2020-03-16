@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Monitor Roll Input
   m_EditorClassIdentifier: 
   description: 
+  rollAction: {fileID: 11400000, guid: d7fc1cf77838c8e4396e2878d487eacc, type: 2}
