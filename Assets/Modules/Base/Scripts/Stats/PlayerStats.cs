@@ -11,6 +11,10 @@ namespace Grimsite.Base
         public StatContainer experience;
         public PlayerCurrency playerCurrency;
 
+        public override void InitStats()
+        {
+            base.InitStats();
+        }
     }
 
     [Serializable]

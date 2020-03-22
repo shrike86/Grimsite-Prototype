@@ -26,8 +26,9 @@ namespace Grimsite.Base
 
         private void SpawnCombatText(CharacterStateManager attackingChar)
         {
-            var damage = ((IntVariable)attackingChar.rightHandItem.damageAmounts[attackingChar.rightHandItem.comboIndex].targetStat.value).value;
+            var damage = attackingChar.rightHandItem.damageAmounts[attackingChar.rightHandItem.comboIndex].targetStat.Value;
 
+            Debug.Log(thisCharStates.transform.position);
             GameObject go = Instantiate(combatTextPrefab, thisCharStates.transform.position + yOffset, Quaternion.identity, thisCharStates.transform);
             combatText = go.GetComponentInChildren<UI_CombatText>();
 

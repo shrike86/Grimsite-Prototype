@@ -8,8 +8,6 @@ namespace Grimsite.ThirdPersonController
     [CreateAssetMenu(menuName = "Behaviour/State Actions/Movement/Roll Action")]
     public class RollAction : StateActions
     {
-        public StatContainer staminaCost;
-
         private PlayerStateManager states;
         private bool hasInit;
 
@@ -18,10 +16,7 @@ namespace Grimsite.ThirdPersonController
             if (states == null)
                 states = charStates as PlayerStateManager;
 
-            if (!hasInit)
-                InitStats();
-
-            if (states.HasStamina(((IntVariable)staminaCost.targetStat.value).value))
+            if (states.HasStamina(Mathf.RoundToInt(BaseStats.BASE_ROLL_STAMINA_COST)))
             {
                 SubtractStamina(states);
                 PlayRollAnimation(states);
@@ -57,14 +52,7 @@ namespace Grimsite.ThirdPersonController
 
         private void SubtractStamina(CharacterStateManager states)
         {
-            int rollStamina = ((IntVariable)staminaCost.targetStat.value).value;
-            ((FloatVariable)states.runtimeStats.stamina.targetStat.value).Remove(rollStamina);
-        }
-
-        private void InitStats()
-        {
-            hasInit = true;
-            ((IntVariable)staminaCost.targetStat.value).Set((int)staminaCost.startingValue);
+            states.runtimeStats.stamina.targetStat.Remove(BaseStats.BASE_ROLL_STAMINA_COST);
         }
     }
 }

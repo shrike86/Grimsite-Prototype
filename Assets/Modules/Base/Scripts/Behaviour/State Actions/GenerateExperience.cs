@@ -16,14 +16,14 @@ namespace Grimsite.Base
             if (states == null)
                 Init(charStates);
 
-            playerStats.experience.targetStat.Add(((FloatVariable)experienceGain.targetStat.value).value);
+            playerStats.experience.targetStat.Add(experienceGain.targetStat.Value);
         }
 
         private void Init(CharacterStateManager charStates)
         {
             states = charStates as PlayerStateManager;
             playerStats = states.runtimeStats as PlayerStats;
-            ((FloatVariable)experienceGain.targetStat.value).Set(experienceGain.startingValue);
+            experienceGain.targetStat.Init(experienceGain.startingValue);
         }
     }
 }

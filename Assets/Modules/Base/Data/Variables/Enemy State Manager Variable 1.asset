@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f63c8e0bffe7fd646a4189f9e52e965f, type: 3}
-  m_Name: Player Copper Stat
+  m_Script: {fileID: 11500000, guid: efe936d7f113aa94380a46cf2fc3b39d, type: 3}
+  m_Name: Enemy State Manager Variable 1
   m_EditorClassIdentifier: 
-  value: {fileID: 11400000, guid: e3d8e1c57018a094ca17dfe322aa3b11, type: 2}
+  value: {fileID: 0}

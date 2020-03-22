@@ -87,7 +87,7 @@ namespace Grimsite.Base
 
         public bool IsDead()
         {
-            if (((FloatVariable)runtimeStats.health.targetStat.value).value <= 0)
+            if (runtimeStats.health.targetStat.Value <= 0)
                 return true;
 
             return false;
@@ -95,7 +95,7 @@ namespace Grimsite.Base
 
         public bool HasStamina(int amount)
         {
-            if (((FloatVariable)runtimeStats.stamina.targetStat.value).value >= amount)
+            if (runtimeStats.stamina.targetStat.Value >= amount)
                 return true;
 
             return false;
@@ -106,7 +106,7 @@ namespace Grimsite.Base
             if (hitChar == this)
             {
                 lastHitByChar = attackingChar;
-                ((FloatVariable)runtimeStats.health.targetStat.value).Remove(amount);
+                runtimeStats.health.targetStat.Remove(amount);
             }
         }
 

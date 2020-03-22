@@ -3,45 +3,46 @@ using UnityEngine;
 
 namespace Grimsite.Base
 {
-    [CreateAssetMenu(menuName = "Stats/Stat")]
-    public class Stat : ScriptableObject
+    [System.Serializable]
+    public class Stat 
     {
-        public NumberVariable value;
+        public float maxValue;
+        public float percent;
 
-        public void Set(float v)
+        public event System.Action statChangeEvent;
+
+        private float value;
+
+        public float Value
         {
-            if (value is FloatVariable)
+            get { return this.value; }
+            set 
             {
-                (value as FloatVariable).Set(v);
+                this.value = value;
+                percent = Mathf.Clamp((value / maxValue) * 100, 0, 100);
+                statChangeEvent?.Invoke();
             }
-            else if(value is IntVariable)
-            {
-                (value as IntVariable).Set((int)v);
-            }
+        }
+
+        public void Init(float maxValue)
+        {
+            this.maxValue = maxValue;
+            Value = maxValue;
         }
 
         public void Add(float v)
         {
-            if (value is FloatVariable)
-            {
-                (value as FloatVariable).Add(v);
-            }
-            else if (value is IntVariable)
-            {
-                (value as IntVariable).Add((int)v);
-            }
+            Value += v;
         }
 
         public void Remove(float v)
         {
-            if (value is FloatVariable)
-            {
-                (value as FloatVariable).Remove(v);
-            }
-            else if (value is IntVariable)
-            {
-                (value as IntVariable).Remove((int)v);
-            }
+            Value -= v;
+        }
+
+        public int ToInt()
+        {
+            return Mathf.RoundToInt(Value);
         }
     }
 }

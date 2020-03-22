@@ -59,10 +59,10 @@ namespace Grimsite.Items
         {
             for (int i = 0; i < damageAmounts.Length; i++)
             {
-                damageAmounts[i].targetStat.Set(damageAmounts[i].startingValue);
+                damageAmounts[i].targetStat.Init(damageAmounts[i].startingValue);
             }
 
-            staminaCost.targetStat.Set(staminaCost.startingValue);
+            staminaCost.targetStat.Init(staminaCost.startingValue);
         }
     }
 }

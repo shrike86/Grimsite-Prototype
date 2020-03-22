@@ -19,7 +19,7 @@ namespace Grimsite.ThirdPersonController
             if (sh == null)
                 Init();
 
-            int staminaCost = ((IntVariable)states.rightHandItem.staminaCost.targetStat.value).value;
+            int staminaCost = states.rightHandItem.staminaCost.targetStat.ToInt();
 
             if (states.HasStamina(staminaCost))
             {
@@ -107,8 +107,8 @@ namespace Grimsite.ThirdPersonController
 
         private void SubtractStamina(CharacterStateManager states)
         {
-            int weaponStam = ((IntVariable)states.rightHandItem.staminaCost.targetStat.value).value;
-            ((FloatVariable)states.runtimeStats.stamina.targetStat.value).Remove(weaponStam);
+            int weaponStam = states.rightHandItem.staminaCost.targetStat.ToInt();
+            states.runtimeStats.stamina.targetStat.Remove(weaponStam);
         }
     }
 

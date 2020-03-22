@@ -2455,10 +2455,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcde458109816b7459019a6d26977946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statType: 1
   charStates: {fileID: 11400000, guid: 6d0ae50881c22224ea6966615d9c9f64, type: 2}
   slider: {fileID: 0}
-  targetInt: {fileID: 0}
-  targetFloat: {fileID: 11400000, guid: 27c02d1cecf45f54e85f5e7ed9e880e9, type: 2}
+  targetStat:
+    maxValue: 0
+    percent: 0
   updateSpeed: 0
   isEnemyCanvas: 1
 --- !u!114 &327957842
@@ -29539,10 +29541,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcde458109816b7459019a6d26977946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statType: 0
   charStates: {fileID: 11400000, guid: f01d7192f3b4cfd42b5c76919d0f005a, type: 2}
   slider: {fileID: 0}
-  targetInt: {fileID: 0}
-  targetFloat: {fileID: 11400000, guid: 071b1b749b948b34d81b44091c00c01d, type: 2}
+  targetStat:
+    maxValue: 0
+    percent: 0
   updateSpeed: 0
   isEnemyCanvas: 0
 --- !u!1 &4371526823693423024
@@ -30079,10 +30083,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcde458109816b7459019a6d26977946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statType: 1
   charStates: {fileID: 11400000, guid: f01d7192f3b4cfd42b5c76919d0f005a, type: 2}
   slider: {fileID: 0}
-  targetInt: {fileID: 0}
-  targetFloat: {fileID: 11400000, guid: 3e199271eecd0104bb43bb96d41a488f, type: 2}
+  targetStat:
+    maxValue: 0
+    percent: 0
   updateSpeed: 0
   isEnemyCanvas: 0
 --- !u!114 &4663374741351800792
@@ -30186,10 +30192,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcde458109816b7459019a6d26977946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statType: 0
   charStates: {fileID: 11400000, guid: 6d0ae50881c22224ea6966615d9c9f64, type: 2}
   slider: {fileID: 0}
-  targetInt: {fileID: 0}
-  targetFloat: {fileID: 11400000, guid: 57b02041ec89b5b4b9d7750a78922050, type: 2}
+  targetStat:
+    maxValue: 0
+    percent: 0
   updateSpeed: 0
   isEnemyCanvas: 1
 --- !u!1 &4663374741516105737

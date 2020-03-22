@@ -6,34 +6,18 @@ namespace Grimsite.Base
     [CreateAssetMenu(menuName = "Behaviour/State Actions/Base/Regenerate Stamina")]
     public class RegenerateStamina : StateActions
     {
-        public StatContainer baseStaminaRegen;
-
-        private bool hasInit;
-
-        private void OnEnable()
-        {
-            hasInit = false;
-        }
-
         public override void Execute(CharacterStateManager states)
         {
-            if (!hasInit)
-                InitStat();
+            float currentStam = states.runtimeStats.stamina.targetStat.Value;
+            float maxStamina = (float)Convert.ToDecimal(states.runtimeStats.stamina.startingValue);
 
-            float currentStam = ((FloatVariable)states.runtimeStats.stamina.targetStat.value).value;
-            float maxRegen = (float)Convert.ToDecimal(states.runtimeStats.stamina.startingValue);
-            float regenAmount = ((FloatVariable)baseStaminaRegen.targetStat.value).value;
+            // Eventually this will be plus skill modifier amount.
+            float regenAmount = BaseStats.BASE_STAMINA_REGEN;
 
-            if (currentStam < maxRegen)
+            if (currentStam < maxStamina)
             {
                 states.runtimeStats.stamina.targetStat.Add(regenAmount);
             }
-        }
-
-        private void InitStat()
-        {
-            hasInit = true;
-            ((FloatVariable)baseStaminaRegen.targetStat.value).Set(baseStaminaRegen.startingValue);
         }
     }
 }

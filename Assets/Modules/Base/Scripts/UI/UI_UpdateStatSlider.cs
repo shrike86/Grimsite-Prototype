@@ -7,10 +7,10 @@ namespace Grimsite.Base
 {
     public class UI_UpdateStatSlider : MonoBehaviour
     {
+        public StatType statType;
         public StateManagerVariable charStates;
         public Slider slider;
-        public IntVariable targetInt;
-        public FloatVariable targetFloat;
+        public Stat targetStat;
         [Range(0, 10)]
         public float updateSpeed;
         public bool isEnemyCanvas;
@@ -21,14 +21,12 @@ namespace Grimsite.Base
         {
             slider = GetComponent<Slider>();
 
-            if (targetInt != null)
-                targetInt.gameEvent += UpdateSlider;
-            else
-                targetFloat.gameEvent += UpdateSlider;
+            AssignStat();
         }
 
         private void Start()
         {
+            targetStat.statChangeEvent += UpdateSlider;
             enemyStates = charStates.value as EnemyStateManager;
         }
 
@@ -45,28 +43,25 @@ namespace Grimsite.Base
             }
         }
 
-        private void UpdateSlider()
+        private void AssignStat()
         {
-            if (targetInt != null)
-                StartCoroutine(ChangeToPercent(targetInt.value));
-            else
-                StartCoroutine(ChangeToPercent(targetFloat.value))
-;
+            switch (statType)
+            {
+                case StatType.Health:
+                    targetStat = charStates.value.runtimeStats.health.targetStat;
+                    break;
+                case StatType.Stamina:
+                    targetStat = charStates.value.runtimeStats.stamina.targetStat;
+                    break;
+                default:
+                    break;
+            }
         }
 
-        private IEnumerator ChangeToPercent(int percent)
+        private void UpdateSlider()
         {
-            float currentPercentage = slider.value;
-            float elapsed = 0f;
-
-            while (elapsed < updateSpeed)
-            {
-                elapsed += Time.deltaTime;
-                slider.value = Mathf.Lerp(currentPercentage, percent, elapsed / updateSpeed);
-                yield return null;
-            }
-
-            slider.value = percent;
+            if (targetStat != null)
+                StartCoroutine(ChangeToPercent(targetStat.percent));
         }
 
         private IEnumerator ChangeToPercent(float percent)
@@ -88,10 +83,16 @@ namespace Grimsite.Base
         {
             gameObject.SetActive(false);
 
-            if (targetInt != null)
-                targetInt.gameEvent -= UpdateSlider;
-            else
-                targetFloat.gameEvent -= UpdateSlider;
+            if (targetStat != null)
+                targetStat.statChangeEvent -= UpdateSlider;
         }
+    }
+
+    public enum StatType
+    { 
+        Health,
+        Stamina,
+        Experience,
+        Currency
     }
 }

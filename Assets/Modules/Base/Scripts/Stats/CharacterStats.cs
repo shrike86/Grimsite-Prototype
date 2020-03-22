@@ -11,8 +11,8 @@ namespace Grimsite.Base
 
         public virtual void InitStats()
         {
-            ((FloatVariable)health.targetStat.value).Set(health.startingValue);
-            ((FloatVariable)stamina.targetStat.value).Set(stamina.startingValue);
+            health.targetStat.Init(health.startingValue);
+            stamina.targetStat.Init(stamina.startingValue);
         }
     }
 }
