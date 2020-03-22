@@ -15,13 +15,12 @@ namespace Grimsite.Base
 
         public override void Execute(CharacterStateManager charStates)
         {
-            if (states == null)
-                states = charStates as PlayerStateManager;
+            states = charStates as PlayerStateManager;
 
             switch (targetAxis)
             {
                 case InputAxisType.X:
-                    value = states.mouseX; 
+                    value = states.mouseX;
                     break;
                 case InputAxisType.Y:
                     value = states.mouseY;
@@ -32,7 +31,7 @@ namespace Grimsite.Base
         }
 
         public enum InputAxisType
-        { 
+        {
             X,
             Y
         }

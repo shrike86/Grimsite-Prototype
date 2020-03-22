@@ -16,8 +16,7 @@ namespace Grimsite.ThirdPersonController
 
         public override void Execute()
         {
-            if (states == null)
-                states = charStates.value as PlayerStateManager;
+            states = charStates.value as PlayerStateManager;
 
             mouseX.Execute(states);
             mouseY.Execute(states);

@@ -20,14 +20,15 @@ namespace Grimsite.Base
         private void Awake()
         {
             slider = GetComponent<Slider>();
-
-            AssignStat();
         }
 
         private void Start()
         {
+            if (isEnemyCanvas)
+                enemyStates = GetComponentInParent<EnemyStateManager>();
+
+            AssignStat();
             targetStat.statChangeEvent += UpdateSlider;
-            enemyStates = charStates.value as EnemyStateManager;
         }
 
         private void LateUpdate()
@@ -48,10 +49,16 @@ namespace Grimsite.Base
             switch (statType)
             {
                 case StatType.Health:
-                    targetStat = charStates.value.runtimeStats.health.targetStat;
+                    if (isEnemyCanvas)
+                        targetStat = enemyStates.runtimeStats.health.targetStat;
+                    else
+                        targetStat = charStates.value.runtimeStats.health.targetStat;
                     break;
                 case StatType.Stamina:
-                    targetStat = charStates.value.runtimeStats.stamina.targetStat;
+                    if (isEnemyCanvas)
+                        targetStat = enemyStates.runtimeStats.stamina.targetStat;
+                    else
+                        targetStat = charStates.value.runtimeStats.stamina.targetStat;
                     break;
                 default:
                     break;
@@ -89,7 +96,7 @@ namespace Grimsite.Base
     }
 
     public enum StatType
-    { 
+    {
         Health,
         Stamina,
         Experience,

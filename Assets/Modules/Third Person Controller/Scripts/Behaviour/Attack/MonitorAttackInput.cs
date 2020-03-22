@@ -13,12 +13,11 @@ namespace Grimsite.ThirdPersonController
 
         private PlayerStateManager states;
         private PlayerControls inputs;
-        
+
 
         public override bool CheckCondition(CharacterStateManager charStates)
         {
-            if (states == null)
-                states = charStates as PlayerStateManager;
+            states = charStates as PlayerStateManager;
 
             if (inputs == null)
                 Init(states);
@@ -42,7 +41,7 @@ namespace Grimsite.ThirdPersonController
                 return;
 
             attackAction.Execute(states);
-            
+
         }
     }
 }

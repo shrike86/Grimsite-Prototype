@@ -7,6 +7,8 @@ namespace Grimsite.Base
 {
     public class CharacterStateManager : MonoBehaviour, ILockable
     {
+        [Header("Networking")]
+        public string characterId;
         [Header("References")]
         public Animator anim;
         public AnimatorHook animHook;

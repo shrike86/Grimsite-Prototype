@@ -12,8 +12,7 @@ namespace Grimsite.ThirdPersonController
 
         public override bool CheckCondition(CharacterStateManager characterStates)
         {
-            if (states == null)
-                states = characterStates as PlayerStateManager;
+            states = characterStates as PlayerStateManager;
 
             if (states.canMove)
             {

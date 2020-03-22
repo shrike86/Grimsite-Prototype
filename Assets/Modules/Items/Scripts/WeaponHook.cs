@@ -7,8 +7,8 @@ namespace Grimsite.Items
 {
     public class WeaponHook : MonoBehaviour
     {
-        DamageCollider[] damageColliders;
-
+        private CombatTextHook combatTextHook;
+        private DamageCollider[] damageColliders;
         private CharacterStateManager attackingChar;
 
         public void Init(CharacterStateManager cs)
@@ -46,6 +46,9 @@ namespace Grimsite.Items
             {
                 PlayerStateManager st = attackingChar as PlayerStateManager;
                 hitCharacter.TakeDamage(hitCharacter, attackingChar, st.rightHandItem.damageAmounts[st.rightHandItem.comboIndex].targetStat.ToInt());
+
+                combatTextHook = hitCharacter.GetComponentInChildren<CombatTextHook>();
+                combatTextHook.SpawnCombatText(st);
             }
         }
 

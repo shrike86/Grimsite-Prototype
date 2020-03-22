@@ -12,16 +12,44 @@ namespace Grimsite.Base
         private DamageCollider charCollider;
         private UI_CombatText combatText;
         private CharacterStateManager thisCharStates;
+        private CharacterStateManager attackingCharStates;
+        private bool hasInit;
         private Vector3 randomizeIntensity = new Vector3(0.5f, 0, 0);
-
         private Vector3 yOffset = new Vector3(0, 2.2f, 0);
+
+        private void OnEnable()
+        {
+            hasInit = false;
+        }
+
+        private void OnDisable()
+        {
+            hasInit = false;
+        }
 
         public override void Execute(CharacterStateManager characterStates)
         {
-            thisCharStates = characterStates as CharacterStateManager;
+            if (!hasInit)
+                Init(characterStates);
 
+            if (attackingCharStates == null)
+                return;
+
+            thisCharStates = characterStates as CharacterStateManager;
+            SpawnCombatText(attackingCharStates);
+        }
+
+        private void UpdateAttackingCharacter(CharacterStateManager attackingChar)
+        {
+            attackingCharStates = attackingChar;
+        }
+
+        private void Init(CharacterStateManager characterStates)
+        {
+            Debug.Log(characterStates);
+            hasInit = true;
             charCollider = characterStates.GetComponent<DamageCollider>();
-            charCollider.onHit += SpawnCombatText;
+            charCollider.onHit += UpdateAttackingCharacter;
         }
 
         private void SpawnCombatText(CharacterStateManager attackingChar)

@@ -23,8 +23,7 @@ namespace Grimsite.ThirdPersonController
 
         public override void Execute()
         {
-            if (states == null)
-                states = charStates.value as PlayerStateManager;
+            states = charStates.value as PlayerStateManager;
 
             if (states.currentLockonTarget == null)
                 return;
@@ -32,7 +31,7 @@ namespace Grimsite.ThirdPersonController
             Vector3 direction = states.currentLockonTarget.position - cameraYTransform.value.position;
             Vector3 pivotDirection = direction;
             direction.y = 0;
-            
+
 
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             cameraYTransform.value.rotation = Quaternion.Slerp(cameraYTransform.value.rotation, targetRotation, delta.value * speed);

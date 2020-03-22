@@ -12,8 +12,7 @@ namespace Grimsite.ThirdPersonController
 
         public override void Execute(CharacterStateManager characterStates)
         {
-            if (playerStates == null)
-                playerStates = characterStates as PlayerStateManager;
+            playerStates = characterStates as PlayerStateManager;
 
             if (playerStates == null)
                 return;

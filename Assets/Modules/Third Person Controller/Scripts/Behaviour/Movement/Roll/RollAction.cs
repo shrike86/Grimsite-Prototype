@@ -13,8 +13,7 @@ namespace Grimsite.ThirdPersonController
 
         public override void Execute(CharacterStateManager charStates)
         {
-            if (states == null)
-                states = charStates as PlayerStateManager;
+            states = charStates as PlayerStateManager;
 
             if (states.HasStamina(Mathf.RoundToInt(BaseStats.BASE_ROLL_STAMINA_COST)))
             {

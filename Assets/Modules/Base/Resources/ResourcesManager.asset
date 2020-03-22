@@ -16,3 +16,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08dc85ea1b09a524289dd3b2ee08c30e, type: 2}
   - {fileID: 11400000, guid: b000b94c46a2cef45b681740d27629f7, type: 2}
   - {fileID: 11400000, guid: 018bd7a8c838f5640a6feef4b2b6bcf3, type: 2}
+  allEnemyStats:
+  - {fileID: 11400000, guid: dc2e8e2034eae9c48b49d8f96e1dcbf7, type: 2}
+  - {fileID: 11400000, guid: a67a3ef881316f14c93825568868514e, type: 2}

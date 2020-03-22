@@ -6,6 +6,7 @@ namespace Grimsite.Base
 {
     public abstract class CharacterStats : ScriptableObject
     {
+        public string characterId;
         public StatContainer health;
         public StatContainer stamina;
 

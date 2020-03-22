@@ -13,8 +13,7 @@ namespace Grimsite.ThirdPersonController
 
         public override void Execute(CharacterStateManager charStates)
         {
-            if (states == null)
-                states = charStates as PlayerStateManager;
+            states = charStates as PlayerStateManager;
 
             if (animActions.Length > 0)
             {
@@ -30,7 +29,7 @@ namespace Grimsite.ThirdPersonController
             }
 
             states.anim.SetFloat(floatName, states.moveAmount, .2f, states.delta);
-            
+
         }
     }
 }

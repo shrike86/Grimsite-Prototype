@@ -11,6 +11,8 @@ namespace Grimsite.Base
         public float delta;
         public float fixedDelta;
 
+        private ResourcesManager resourcesManager;
+
         private void Awake()
         {
             Init();
@@ -18,8 +20,12 @@ namespace Grimsite.Base
 
         public override void Init()
         {
+            resourcesManager = GameManager.GetResourcesManager();
+            runtimeStats = resourcesManager.GetEnemyStats(characterId);
+
             base.Init();
 
+            rigidbody.mass = 100;
         }
 
         private void FixedUpdate()

@@ -16,8 +16,7 @@ namespace Grimsite.ThirdPersonController
 
         public override void Execute(CharacterStateManager charStates)
         {
-            if (states == null)
-                states = charStates as PlayerStateManager;
+            states = charStates as PlayerStateManager;
 
             states.rigidbody.drag = 0;
             states.generalTime += states.delta;
