@@ -20,6 +20,10 @@ MonoBehaviour:
   idCount: 0
   transitions:
   - id: 0
+    condition: {fileID: 11400000, guid: 3fb211142c3ab7c4f9f21675c9c0bfe8, type: 2}
+    targetState: {fileID: 11400000, guid: 522ef8d78e697bc4c80eda34ff2cd317, type: 2}
+    disable: 0
+  - id: 0
     condition: {fileID: 11400000, guid: dcbfdd4fa65404d4cb5f8987bbc9c5d0, type: 2}
     targetState: {fileID: 11400000, guid: 522ef8d78e697bc4c80eda34ff2cd317, type: 2}
     disable: 0

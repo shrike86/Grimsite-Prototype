@@ -5,7 +5,7 @@ using Grimsite.Base;
 
 namespace Grimsite.ThirdPersonController
 {
-    [CreateAssetMenu(menuName = "Behaviour/Mono Actions/Handle Lock on Targets")]
+    [CreateAssetMenu(menuName = "Behaviour/Mono Actions/TPC/Handle Lock on Targets")]
     public class HandleLockOnTarget : Action
     {
         [System.NonSerialized]

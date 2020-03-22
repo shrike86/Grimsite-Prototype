@@ -39498,8 +39498,15 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 1
   m_Events:
-  - time: 0.16666667
+  - time: 0
     functionName: OpenComboPhase
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0
+    functionName: OpenAnimationRotate
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -39512,8 +39519,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.36666667
+    functionName: CloseAnimationRotate
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.4
     functionName: CloseDamageColliders
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.46666667
+    functionName: OpenAnimationMove
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -39528,6 +39549,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.73333335
     functionName: CloseDamageColliders
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.76666665
+    functionName: CloseAnimationMove
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

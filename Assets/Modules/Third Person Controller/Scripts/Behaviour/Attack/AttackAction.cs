@@ -6,7 +6,7 @@ using Grimsite.Items;
 
 namespace Grimsite.ThirdPersonController
 {
-    [CreateAssetMenu(menuName = "Behaviour/State Actions/Attack/Attack Action")]
+    [CreateAssetMenu(menuName = "Behaviour/State Actions/TPC/Attack/Attack Action")]
     public class AttackAction : StateActions
     {
         public TransformVariable gameManager;
@@ -58,6 +58,7 @@ namespace Grimsite.ThirdPersonController
 
             if (states.currentAttackPhase == ComboAttackPhase.First && states.canCombo && states.comboCooldownDone)
             {
+                states.canMove = false;
                 states.canCombo = false;
                 states.currentAttackPhase = ComboAttackPhase.Second;
                 states.rightHandItem.comboIndex = 1;
@@ -74,6 +75,7 @@ namespace Grimsite.ThirdPersonController
 
             if (states.currentAttackPhase == ComboAttackPhase.Second && states.canCombo && states.comboCooldownDone)
             {
+                states.canMove = false;
                 states.canCombo = false;
                 states.currentAttackPhase = ComboAttackPhase.Third;
                 states.rightHandItem.comboIndex = 2;

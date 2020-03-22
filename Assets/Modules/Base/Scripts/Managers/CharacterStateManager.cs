@@ -16,6 +16,7 @@ namespace Grimsite.Base
         public Transform mTransform;
         public Weapon rightHandItem;
         public Weapon leftHandItem;
+        public CharacterStateManager lastHitByChar;
 
         [Header("Character State Bools")]
         public State currentState;
@@ -35,6 +36,8 @@ namespace Grimsite.Base
         public bool isDualWield;
         public bool canCombo;
         public bool comboCooldownDone;
+        public bool canMove;
+        public bool canRotate;
         [Header("Stats")]
         public CharacterStats runtimeStats;
 
@@ -98,10 +101,11 @@ namespace Grimsite.Base
             return false;
         }
 
-        public void TakeDamage(CharacterStateManager st, int amount)
+        public void TakeDamage(CharacterStateManager hitChar, CharacterStateManager attackingChar, int amount)
         {
-            if (st == this)
+            if (hitChar == this)
             {
+                lastHitByChar = attackingChar;
                 ((FloatVariable)runtimeStats.health.targetStat.value).Remove(amount);
             }
         }

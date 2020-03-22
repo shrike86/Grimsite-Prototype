@@ -13,11 +13,17 @@ MonoBehaviour:
   m_Name: Enemy Stats
   m_EditorClassIdentifier: 
   health:
-    startingValue: 100
+    startingValue: 10000
     targetStat: {fileID: 11400000, guid: 7be315cf04634284e871cfb47b58c4de, type: 2}
   stamina:
     startingValue: 100
     targetStat: {fileID: 11400000, guid: 39a0b56365f69c94bb617dd1a70d4535, type: 2}
-  experienceReward:
-    startingValue: 100
-    targetStat: {fileID: 11400000, guid: ff04a71274409ca469b203a7bd6d990a, type: 2}
+  experienceReward: 100
+  lootChance: 80
+  maxGold: 4
+  maxSilver: 100
+  maxCopper: 100
+  enemyCurrencyReward:
+    gold: 2
+    silver: 75
+    copper: 66

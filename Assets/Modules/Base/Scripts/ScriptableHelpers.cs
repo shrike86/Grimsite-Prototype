@@ -5,9 +5,14 @@ namespace Grimsite.Base
 {
     public class ScriptableHelpers : MonoBehaviour
     {
-        public void PerformDeathCleanupWrapper(CharacterStateManager states)
+        public void DisableAnimatorWrapper(CharacterStateManager states)
         {
-            StartCoroutine(PerformDeathCleanup(states));
+            StartCoroutine(DisableAnimator(states));
+        }
+
+        public void DestroyObjectAfterPeriodWrapper(GameObject obj, int period)
+        {
+            StartCoroutine(DestroyObjectAfterPeriod(obj, period));
         }
 
         public void WaitForTime(float time, System.Action<bool> callback)
@@ -21,12 +26,17 @@ namespace Grimsite.Base
             }));
         }
 
-        private IEnumerator PerformDeathCleanup(CharacterStateManager states)
+        private IEnumerator DisableAnimator(CharacterStateManager states)
         {
             yield return new WaitForEndOfFrame();
             states.anim.enabled = false;
             states.animHook.enabled = false;
-            states.enabled = false;
+        }
+
+        private IEnumerator DestroyObjectAfterPeriod(GameObject obj, int period)
+        {
+            yield return new WaitForSeconds(period);
+            Destroy(obj);
         }
 
         private IEnumerator WaitForTimeImpl(float time, System.Action<bool> callback)

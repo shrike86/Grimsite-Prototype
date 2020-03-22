@@ -6,7 +6,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 namespace Grimsite.ThirdPersonController
 {
-    [CreateAssetMenu(menuName = "Behaviour/Conditions/Monitor Attack Input")]
+    [CreateAssetMenu(menuName = "Behaviour/Conditions/TPC/Monitor Attack Input")]
     public class MonitorAttackInput : Condition
     {
         public AttackAction attackAction;

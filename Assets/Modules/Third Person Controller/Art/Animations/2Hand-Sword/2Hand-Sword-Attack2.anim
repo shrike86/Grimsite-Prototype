@@ -110931,8 +110931,15 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 1
   m_Events:
-  - time: 0.16666667
+  - time: 0
     functionName: OpenComboPhase
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0
+    functionName: OpenAnimationRotate
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -110945,6 +110952,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.5
+    functionName: CloseAnimationRotate
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.53333336
     functionName: CloseDamageColliders
     data: 
@@ -110952,8 +110966,8 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.8333333
-    functionName: CloseComboPhase
+  - time: 0.53333336
+    functionName: OpenAnimationMove
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -110961,6 +110975,20 @@ AnimationClip:
     messageOptions: 0
   - time: 1.2
     functionName: SetEndAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.2
+    functionName: CloseAnimationMove
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.2
+    functionName: CloseComboPhase
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

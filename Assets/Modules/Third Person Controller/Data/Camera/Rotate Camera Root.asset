@@ -18,9 +18,9 @@ MonoBehaviour:
   angle: {fileID: 11400000, guid: 258b9f779ac6be74e9f89e3903c2d054, type: 2}
   charStates: {fileID: 11400000, guid: f01d7192f3b4cfd42b5c76919d0f005a, type: 2}
   targetAxis: 1
-  speed: 13
-  minClamp: -35
-  maxClamp: 35
+  speed: 80
+  minClamp: 0
+  maxClamp: 0
   clamp: 0
   negative: 0
   canTurn: 0

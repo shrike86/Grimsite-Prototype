@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Right Fist
   m_EditorClassIdentifier: 
   uiName: 
-  id: 
+  id: right_fist
   icon: {fileID: 0}
   equipmentType: 8
   leftHandWeaponParent: {fileID: 11400000, guid: 9730d29e6e9626a4aab21d074ef8bf33,

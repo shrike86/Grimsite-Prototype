@@ -117,5 +117,25 @@ namespace Grimsite.Base
                     playerStates.rightHandItem.runtimeWeapon.weaponHook.CloseDamageColliders();
             }
         }
+
+        public void OpenAnimationMove()
+        {
+            playerStates.canMove = true;
+        }
+
+        public void CloseAnimationMove()
+        {
+            playerStates.canMove = false;
+        }
+
+        public void OpenAnimationRotate()
+        {
+            playerStates.canRotate = true;
+        }
+
+        public void CloseAnimationRotate()
+        {
+            playerStates.canRotate = false;
+        }
     }
 }

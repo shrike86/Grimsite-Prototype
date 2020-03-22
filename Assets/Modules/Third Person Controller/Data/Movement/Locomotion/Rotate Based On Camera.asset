@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 11400000, guid: 40abb11639973d249816df66a81d777a, type: 2}
   speed: 20
+  attackRotationSpeed: 3

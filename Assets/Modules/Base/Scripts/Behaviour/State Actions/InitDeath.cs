@@ -7,11 +7,16 @@ namespace Grimsite.Base
     public class InitDeath : StateActions
     {
         public TransformVariable gameManager;
+        public StateActions awardExperienceAction;
+        public StateActions dropLootAction;
 
         public override void Execute(CharacterStateManager states)
         {
             ScriptableHelpers sh = gameManager.value.GetComponent<ScriptableHelpers>();
-            sh.PerformDeathCleanupWrapper(states);
+            sh.DisableAnimatorWrapper(states);
+            awardExperienceAction.Execute(states);
+            sh.DestroyObjectAfterPeriodWrapper(states.gameObject, 3);
+            dropLootAction.Execute(states);
         }
     }
 }

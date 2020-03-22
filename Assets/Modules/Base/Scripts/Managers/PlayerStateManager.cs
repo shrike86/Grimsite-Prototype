@@ -7,6 +7,7 @@ namespace Grimsite.Base
     {
         [Header("Player State")]
         public State playerConstant;
+        public PlayerProfile profile;
 
         public float generalTime;
         public float delta;
@@ -37,11 +38,6 @@ namespace Grimsite.Base
         private void Start()
         {
             runtimeStats.InitStats();
-
-            // This will be removed when unarmed is no longer the default and the last equipped weapons will be equipped on init.
-            leftHandItem.Init(this);
-            rightHandItem.Init(this);
-            isUnarmed = true;
         }
 
         public override void Init()

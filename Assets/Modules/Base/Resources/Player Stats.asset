@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddb41848a140f154e81453a354080406, type: 3}
+  m_Name: Player Stats
+  m_EditorClassIdentifier: 
+  health:
+    startingValue: 100
+    targetStat: {fileID: 11400000, guid: 81a05b8566a756f48bd36642ad71bc11, type: 2}
+  stamina:
+    startingValue: 100
+    targetStat: {fileID: 11400000, guid: 29abd74769f8fda4b8c16207d02c33f1, type: 2}
+  experience:
+    startingValue: 0
+    targetStat: {fileID: 11400000, guid: e57b66077968d4f4cbe0a6597aa0bee9, type: 2}
+  playerCurrency:
+    gold: 2
+    silver: 40
+    copper: 100

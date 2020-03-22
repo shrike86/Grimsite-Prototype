@@ -47,8 +47,8 @@ namespace Grimsite.Inventory
                 {
                     previousItem = (EquippableItem)equipmentSlots[i].Item;
                     equipmentSlots[i].Item = item;
-                    playerInvManager.playerEquippedItems.Add(item);
-                    playerInvManager.playerInventoryItems.Remove(item);
+                    playerInvManager.equippedItems.Add(item);
+                    playerInvManager.inventoryItems.Remove(item);
                     return true;
                 }
             }
@@ -65,13 +65,32 @@ namespace Grimsite.Inventory
                 if (equipmentSlots[i].Item == item)
                 {
                     equipmentSlots[i].Item = null;
-                    playerInvManager.playerEquippedItems.Remove(item);
-                    playerInvManager.playerInventoryItems.Add(item);
+                    playerInvManager.equippedItems.Remove(item);
+                    playerInvManager.inventoryItems.Add(item);
                     return true;
                 }
             }
 
             return false;
+        }
+
+        public void SetStartingItems(List<Item> startingItems)
+        {
+            int i = 0;
+
+            for (; i < startingItems.Count && i < equipmentSlots.Length; i++)
+            {
+                if (equipmentSlots[i].equipmentType == startingItems[i].equipmentType || equipmentSlots[i].secondaryEquipmentType == startingItems[i].equipmentType)
+                {
+                    equipmentSlots[i].Item = startingItems[i];
+                    return;
+                }
+            }
+
+            for (; i < equipmentSlots.Length; i++)
+            {
+                equipmentSlots[i].Item = null;
+            }
         }
     }
 }

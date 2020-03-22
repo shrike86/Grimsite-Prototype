@@ -36,8 +36,6 @@ namespace Grimsite.Inventory
                 itemSlots[i].OnEndDragEvent += OnEndDragEvent;
                 itemSlots[i].OnDropEvent += OnDropEvent;
             }
-
-            SetStartingItems();
         }
 
         public bool AddItem(Item item)
@@ -80,13 +78,13 @@ namespace Grimsite.Inventory
             return true;
         }
 
-        private void SetStartingItems()
+        public void SetStartingItems(List<Item> startingItems)
         {
             int i = 0;
 
-            for (; i < playerInvManager.playerInventoryItems.Count && i < itemSlots.Length; i++)
+            for (; i < startingItems.Count && i < itemSlots.Length; i++)
             {
-                itemSlots[i].Item = playerInvManager.playerInventoryItems[i];
+                itemSlots[i].Item = startingItems[i];
             }
 
             for (; i < itemSlots.Length; i++)
@@ -94,6 +92,5 @@ namespace Grimsite.Inventory
                 itemSlots[i].Item = null;
             }
         }
-
     }
 }

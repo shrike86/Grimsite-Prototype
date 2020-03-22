@@ -73,6 +73,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Escape Key"",
+                    ""type"": ""Button"",
+                    ""id"": ""1020517c-14e2-416f-901f-e5916397a56d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -207,6 +215,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""RightMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37bd8ce2-464a-4a11-9299-923f737b0c58"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape Key"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -222,6 +241,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Player_ToggleInventory = m_Player.FindAction("ToggleInventory", throwIfNotFound: true);
         m_Player_LeftMouse = m_Player.FindAction("LeftMouse", throwIfNotFound: true);
         m_Player_RightMouse = m_Player.FindAction("RightMouse", throwIfNotFound: true);
+        m_Player_EscapeKey = m_Player.FindAction("Escape Key", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -278,6 +298,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_ToggleInventory;
     private readonly InputAction m_Player_LeftMouse;
     private readonly InputAction m_Player_RightMouse;
+    private readonly InputAction m_Player_EscapeKey;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -289,6 +310,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @ToggleInventory => m_Wrapper.m_Player_ToggleInventory;
         public InputAction @LeftMouse => m_Wrapper.m_Player_LeftMouse;
         public InputAction @RightMouse => m_Wrapper.m_Player_RightMouse;
+        public InputAction @EscapeKey => m_Wrapper.m_Player_EscapeKey;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -319,6 +341,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @RightMouse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightMouse;
                 @RightMouse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightMouse;
                 @RightMouse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightMouse;
+                @EscapeKey.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscapeKey;
+                @EscapeKey.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscapeKey;
+                @EscapeKey.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscapeKey;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -344,6 +369,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @RightMouse.started += instance.OnRightMouse;
                 @RightMouse.performed += instance.OnRightMouse;
                 @RightMouse.canceled += instance.OnRightMouse;
+                @EscapeKey.started += instance.OnEscapeKey;
+                @EscapeKey.performed += instance.OnEscapeKey;
+                @EscapeKey.canceled += instance.OnEscapeKey;
             }
         }
     }
@@ -357,5 +385,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnToggleInventory(InputAction.CallbackContext context);
         void OnLeftMouse(InputAction.CallbackContext context);
         void OnRightMouse(InputAction.CallbackContext context);
+        void OnEscapeKey(InputAction.CallbackContext context);
     }
 }

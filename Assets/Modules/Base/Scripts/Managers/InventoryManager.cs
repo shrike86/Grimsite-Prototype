@@ -19,12 +19,13 @@ namespace Grimsite.Base
         public EquipmentPanel bottomEquipmentPanel;
 
         [Header("Player Items")]
-        public List<Item> playerInventoryItems;
-        public List<Item> playerEquippedItems;
+        public List<Item> inventoryItems;
+        public List<Item> equippedItems;
 
         [Header("Actions")]
         public StateActions weaponModelHandler;
         public StateActions monitorInventoryToggle;
+        public StateActions initInventory;
         public Action handleEquipByDrag;
         public Action handleEquipByClick;
 
@@ -45,6 +46,7 @@ namespace Grimsite.Base
             bottomEquipmentPanel.Init();
 
             weaponModelHandler.Execute(states);
+            initInventory.Execute(states);
         }
 
         private void Update()

@@ -11,6 +11,7 @@ namespace Grimsite.ThirdPersonController
     {
         public TransformVariable cameraTransform;
         public float speed = 8;
+        public float attackRotationSpeed = 3;
 
         private PlayerStateManager states;
 
@@ -23,6 +24,13 @@ namespace Grimsite.ThirdPersonController
             if (cameraTransform.value == null)
                 return;
 
+            float rotateSpeed;
+
+            if (charStates.canRotate)
+                rotateSpeed = attackRotationSpeed;
+            else
+                rotateSpeed = speed;
+
             Vector3 targetDir = states.movementDirection;
             targetDir.Normalize();
             targetDir.y = 0;
@@ -31,7 +39,7 @@ namespace Grimsite.ThirdPersonController
                 targetDir = states.mTransform.forward;
 
             Quaternion tr = Quaternion.LookRotation(targetDir);
-            Quaternion targetRotation = Quaternion.Slerp(states.mTransform.rotation, tr, states.delta * states.moveAmount * speed);
+            Quaternion targetRotation = Quaternion.Slerp(states.mTransform.rotation, tr, states.delta * states.moveAmount * rotateSpeed);
 
             states.mTransform.rotation = targetRotation;
         }

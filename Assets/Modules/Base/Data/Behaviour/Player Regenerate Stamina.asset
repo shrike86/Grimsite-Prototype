@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Player Regenerate Stamina
   m_EditorClassIdentifier: 
   baseStaminaRegen:
-    startingValue: 0.3
+    startingValue: 0.15
     targetStat: {fileID: 11400000, guid: a48909133bd119347a65ccdd33cb9b42, type: 2}

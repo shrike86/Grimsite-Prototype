@@ -1,4 +1,5 @@
 ﻿using Grimsite.AI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +11,6 @@ namespace Grimsite.Base
         public float delta;
         public float fixedDelta;
 
-        [HideInInspector]
-        public DamageCollider hitCollider;
-
         private void Awake()
         {
             Init();
@@ -22,8 +20,6 @@ namespace Grimsite.Base
         {
             base.Init();
 
-            hitCollider = GetComponent<DamageCollider>();
-            hitCollider.onHit += AwardExperience;
         }
 
         private void FixedUpdate()
@@ -46,15 +42,20 @@ namespace Grimsite.Base
             }
         }
 
+        //// For testing, later this will occur when the corpse is looted.
+        //private void AwardGold(CharacterStateManager charStates)
+        //{
+        //    PlayerStateManager playerStates = charStates as PlayerStateManager;
+        //    PlayerStats playerStats = playerStates.runtimeStats as PlayerStats;
+        //    EnemyStats thisEnemyStats = this.runtimeStats as EnemyStats;
 
-        private void AwardExperience(CharacterStateManager charStates)
-        {
-            PlayerStateManager playerStates = charStates as PlayerStateManager;
-            PlayerStats playerStats = playerStates.runtimeStats as PlayerStats;
-            EnemyStats thisEnemyStats = this.runtimeStats as EnemyStats;
+        //    GoldReward enemyGoldReward = thisEnemyStats.enemyGoldReward;
 
-            playerStats.experience.targetStat.Add(((FloatVariable)thisEnemyStats.experienceReward.targetStat.value).value);
-            hitCollider.onHit -= AwardExperience;
-        }
+        //    playerStats.playerCurrency.gold += enemyGoldReward.gold;
+        //    playerStats.playerCurrency.silver += enemyGoldReward.silver;
+        //    playerStats.playerCurrency.copper += enemyGoldReward.copper;
+
+        //    hitCollider.onHit -= AwardGold;
+        //}
     }
 }
